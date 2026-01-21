@@ -44,8 +44,8 @@ const Footer = () => {
                     <div className={styles.col}>
                         <h3 className={styles.colTitle}>Contact</h3>
                         <ul className={styles.links}>
-                            <li>+91 98765 43210</li>
-                            <li>hello@camshoot.com</li>
+                            <li>+91 99999 99999</li>
+                            <li>canmshota@gmail.com</li>
                             <li>Hyderabad, India</li>
                         </ul>
                     </div>

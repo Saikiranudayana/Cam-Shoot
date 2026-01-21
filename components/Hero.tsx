@@ -23,8 +23,8 @@ const Hero = () => {
 
             <div className={styles.content}>
                 <h1 className={styles.title}>
-                    Capturing Moments.<br />
-                    <span className="text-gold">Creating Stories.</span>
+                    We Shoot the Moment,<br />
+                    <span className="text-gold">We Deliver the Emotion.</span>
                 </h1>
 
                 <p className={styles.subtitle}>

@@ -17,11 +17,11 @@ const BookingForm = () => {
                         <div className={styles.contactDetails}>
                             <div>
                                 <span className={styles.contactIcon}>📞</span>
-                                <span>+91 98765 43210</span>
+                                <span>+91 99999 99999</span>
                             </div>
                             <div>
                                 <span className={styles.contactIcon}>📧</span>
-                                <span>hello@camshoot.com</span>
+                                <span>canmshota@gmail.com</span>
                             </div>
                             <div>
                                 <span className={styles.contactIcon}>📍</span>
@@ -45,7 +45,7 @@ const BookingForm = () => {
 
                             <div className={styles.formGroup}>
                                 <label className={styles.label}>Phone Number</label>
-                                <input type="tel" className={styles.input} placeholder="+91 98765 43210" required />
+                                <input type="tel" className={styles.input} placeholder="+91 99999 99999" required />
                             </div>
 
                             <div className={styles.formGroup}>

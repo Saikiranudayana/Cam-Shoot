@@ -6,7 +6,8 @@ const Header = () => {
         <header className={styles.header}>
             <div className={styles.navContainer}>
                 <Link href="/" className={styles.logo}>
-                    CAM<span>SHOOT</span>
+                    {/* eslint-disable-next-line @next/next/no-img-element */}
+                    <img src="/assets/logo-main.png" alt="CamShoot" style={{ height: '40px' }} />
                 </Link>
 
                 <nav className={styles.navLinks}>
