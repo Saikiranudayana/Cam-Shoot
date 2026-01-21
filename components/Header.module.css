@@ -3,13 +3,14 @@
     top: 0;
     left: 0;
     width: 100%;
-    background-color: rgba(255, 255, 255, 0.95);
+    background-color: rgba(18, 18, 18, 0.95);
     backdrop-filter: blur(10px);
     z-index: 1000;
-    box-shadow: 0 2px 20px rgba(0, 0, 0, 0.05);
+    box-shadow: 0 2px 20px rgba(0, 0, 0, 0.3);
     height: 80px;
     display: flex;
     align-items: center;
+    color: var(--color-white);
 }
 
 .navContainer {
@@ -26,7 +27,7 @@
     font-family: var(--font-heading);
     font-weight: 800;
     font-size: 24px;
-    color: var(--color-black);
+    color: var(--color-white);
     letter-spacing: -0.5px;
 }
 
@@ -43,6 +44,7 @@
     font-weight: 500;
     transition: color 0.3s ease;
     font-size: 16px;
+    color: var(--color-white);
 }
 
 .navLink:hover {
