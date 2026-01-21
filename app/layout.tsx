@@ -17,7 +17,7 @@ const outfit = Outfit({
 });
 
 export const metadata: Metadata = {
-  title: "CamShoot | Capturing Moments. Creating Stories.",
+  title: "CamShoot | We Shoot the Moment, We Deliver the Emotion",
   description: "Professional cinematography and photography services by CamShoot.",
 };
 

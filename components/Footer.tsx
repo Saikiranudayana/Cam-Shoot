@@ -7,9 +7,10 @@ const Footer = () => {
             <div className="container">
                 <div className={styles.grid}>
                     <div className={styles.col}>
-                        <h3 className={`${styles.colTitle} ${styles.logo}`}>
-                            CAM<span>SHOOT</span>
-                        </h3>
+                        <Link href="/" className={styles.logo}>
+                            {/* eslint-disable-next-line @next/next/no-img-element */}
+                            <img src="/assets/logo-main.png" alt="CamShoot" style={{ height: '50px', marginBottom: '16px' }} />
+                        </Link>
                         <p className={styles.text}>
                             Capturing moments, creating stories. We are a professional cinematography team dedicated to preserving your memories.
                         </p>
