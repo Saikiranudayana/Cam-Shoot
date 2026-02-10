@@ -1,0 +1,298 @@
+.overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.7);
+    backdrop-filter: blur(5px);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 2000;
+    animation: fadeIn 0.3s ease;
+}
+
+.modal {
+    background-color: var(--color-white);
+    width: 90%;
+    max-width: 900px;
+    max-height: 90vh;
+    border-radius: 16px;
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.2);
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+    animation: slideUp 0.3s ease;
+}
+
+.header {
+    padding: 20px;
+    border-bottom: 1px solid var(--color-gray-100);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: var(--color-white);
+}
+
+.title {
+    font-size: 1.25rem;
+    font-weight: 700;
+    color: var(--color-black);
+}
+
+.closeButton {
+    background: none;
+    border: none;
+    font-size: 1.5rem;
+    cursor: pointer;
+    color: var(--color-dark-gray);
+    transition: color 0.2s;
+}
+
+.closeButton:hover {
+    color: var(--color-gold);
+}
+
+.content {
+    padding: 20px;
+    overflow-y: auto;
+    flex: 1;
+}
+
+.stepIndicator {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 20px;
+    padding: 0 10px;
+}
+
+.stepDot {
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    background-color: var(--color-gray-100);
+    transition: background-color 0.3s;
+}
+
+.stepDotActive {
+    background-color: var(--color-gold);
+}
+
+.stepDotCompleted {
+    background-color: var(--color-gold-dark);
+}
+
+.footer {
+    padding: 20px;
+    border-top: 1px solid var(--color-gray-100);
+    display: flex;
+    justify-content: space-between;
+    background-color: var(--color-gray-50);
+}
+
+.grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 16px;
+}
+
+/* Responsive Grid for Packages */
+.packageGrid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 16px;
+    margin-top: 10px;
+}
+
+/* Card Styling - Gold Theme */
+.pkgCard {
+    border: 2px solid transparent;
+    /* Highlight on select */
+    border-radius: 12px;
+    overflow: hidden;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    background: #FFFACD;
+    /* Light lemon chiffon / gold tint */
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.pkgCardSelected {
+    border-color: var(--color-gold);
+    transform: scale(1.02);
+    box-shadow: 0 8px 15px rgba(212, 175, 55, 0.3);
+}
+
+/* Header Section */
+.pkgHeader {
+    background: linear-gradient(135deg, #F4D06F 0%, #E6C25B 100%);
+    padding: 15px;
+    text-align: center;
+    color: #000;
+}
+
+.pkgName {
+    font-family: var(--font-heading);
+    font-size: 1.4rem;
+    /* Bigger font */
+    font-weight: 800;
+    margin: 0;
+    text-transform: uppercase;
+}
+
+/* Features List */
+.pkgBody {
+    padding: 15px;
+    flex: 1;
+    /* Pushes price to bottom */
+}
+
+.pkgFeatures {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.pkgFeatures li {
+    font-size: 1rem;
+    /* Bigger font */
+    margin-bottom: 8px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    line-height: 1.4;
+}
+
+.pkgIcon {
+    font-size: 1.2rem;
+}
+
+/* Price Bar */
+.pkgPriceBar {
+    background: #4ADE80;
+    /* Green similar to reference */
+    padding: 10px;
+    text-align: center;
+    font-weight: 800;
+    font-size: 1.3rem;
+    color: #064E3B;
+}
+
+/* Drone Option */
+.pkgDrone {
+    background: #FFF2CC;
+    /* Slightly darker gold tint */
+    padding: 10px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    border-top: 1px dashed #D4AF37;
+}
+
+.droneLabel {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-weight: 700;
+    font-size: 1rem;
+    cursor: pointer;
+}
+
+.dronePrice {
+    background: #F4D06F;
+    padding: 2px 8px;
+    border-radius: 4px;
+    font-size: 0.9rem;
+    margin-top: 4px;
+    font-weight: 600;
+    color: #333;
+}
+
+/* Media Queries */
+@media (max-width: 768px) {
+    .packageGrid {
+        grid-template-columns: 1fr;
+        /* Stack vertically on mobile */
+    }
+}
+
+
+.inputGroup {
+    margin-bottom: 16px;
+}
+
+.label {
+    display: block;
+    margin-bottom: 8px;
+    font-weight: 600;
+    font-size: 0.9rem;
+}
+
+.input,
+.select,
+.textarea {
+    width: 100%;
+    padding: 12px;
+    border: 1px solid var(--color-gray-100);
+    border-radius: 8px;
+    font-family: inherit;
+    font-size: 1rem;
+    transition: border-color 0.2s;
+}
+
+.input:focus,
+.select:focus,
+.textarea:focus {
+    outline: none;
+    border-color: var(--color-gold);
+}
+
+.summaryItem {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 8px;
+    font-size: 0.95rem;
+}
+
+.total {
+    border-top: 1px solid var(--color-gray-100);
+    padding-top: 12px;
+    margin-top: 12px;
+    font-weight: 700;
+    font-size: 1.1rem;
+    display: flex;
+    justify-content: space-between;
+}
+
+.error {
+    color: red;
+    font-size: 0.85rem;
+    margin-top: 4px;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+
+    to {
+        opacity: 1;
+    }
+}
+
+@keyframes slideUp {
+    from {
+        transform: translateY(20px);
+        opacity: 0;
+    }
+
+    to {
+        transform: translateY(0);
+        opacity: 1;
+    }
+}

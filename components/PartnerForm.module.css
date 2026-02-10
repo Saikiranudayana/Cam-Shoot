@@ -1,0 +1,81 @@
+.container {
+    width: 100%;
+}
+
+.title {
+    font-size: 2rem;
+    font-weight: 800;
+    margin-bottom: 0.5rem;
+    text-align: center;
+    font-family: var(--font-heading);
+    text-transform: uppercase;
+}
+
+.subtitle {
+    text-align: center;
+    color: #666;
+    margin-bottom: 2rem;
+}
+
+.form {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+}
+
+.group {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+}
+
+.group label {
+    font-weight: 600;
+    font-size: 0.95rem;
+    color: #333;
+}
+
+.group input,
+.group select,
+.group textarea {
+    padding: 12px;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    font-size: 1rem;
+    font-family: inherit;
+    transition: border-color 0.2s;
+    background-color: #fff;
+}
+
+.group input:focus,
+.group select:focus,
+.group textarea:focus {
+    border-color: var(--color-gold);
+    outline: none;
+    box-shadow: 0 0 0 3px rgba(212, 175, 55, 0.1);
+}
+
+.submitBtn {
+    margin-top: 1rem;
+    width: 100%;
+    padding: 14px;
+    font-size: 1.1rem;
+    font-weight: 700;
+}
+
+.successMessage {
+    text-align: center;
+    padding: 40px;
+}
+
+.successMessage h2 {
+    color: #10B981;
+    margin-bottom: 1rem;
+}
+
+.error {
+    color: #EF4444;
+    text-align: center;
+    margin-top: 1rem;
+    font-weight: 500;
+}

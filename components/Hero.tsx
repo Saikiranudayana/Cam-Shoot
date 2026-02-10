@@ -1,7 +1,11 @@
+"use client";
 import Link from 'next/link';
+import { useBooking } from '@/context/BookingContext';
 import styles from './Hero.module.css';
 
 const Hero = () => {
+    const { openBooking } = useBooking();
+
     return (
         <section className={styles.hero}>
             {/* Background Image - Placeholder until we set correct path */}
@@ -32,11 +36,14 @@ const Hero = () => {
                 </p>
 
                 <div className={styles.buttons}>
-                    <Link href="/contact" className="btn btn-gold">
+                    <button onClick={openBooking} className="btn btn-gold">
                         Book a Shoot
-                    </Link>
+                    </button>
                     <Link href="/portfolio" className="btn btn-outline" style={{ color: 'white', borderColor: 'white' }}>
                         View Portfolio
+                    </Link>
+                    <Link href="/partner" className="btn btn-outline" style={{ color: '#F4D06F', borderColor: '#F4D06F', marginLeft: '10px' }}>
+                        Become a Partner
                     </Link>
                 </div>
             </div>

@@ -9,7 +9,7 @@ const Footer = () => {
                     <div className={styles.col}>
                         <Link href="/" className={styles.logo}>
                             {/* eslint-disable-next-line @next/next/no-img-element */}
-                            <img src="/assets/logo-main.png" alt="CamShoot" style={{ height: '50px', marginBottom: '16px' }} />
+                            <img src="/assets/logo-final.jpg" alt="CamShoot" style={{ height: '60px', marginBottom: '16px' }} />
                         </Link>
                         <p className={styles.text}>
                             Capturing moments, creating stories. We are a professional cinematography team dedicated to preserving your memories.

@@ -1,7 +1,10 @@
 "use client";
 import styles from './BookingForm.module.css';
+import { useBooking } from '@/context/BookingContext';
 
 const BookingForm = () => {
+    const { openBooking } = useBooking();
+
     return (
         <section className={styles.booking} id="contact">
             <div className="container">
@@ -11,7 +14,7 @@ const BookingForm = () => {
                             Let's Create <span className="text-gold">Magic</span>
                         </h2>
                         <p className={styles.infoText}>
-                            Ready to capture your special moments? Fill out the form to book your session or get a quote. We'd love to hear from you.
+                            Ready to capture your special moments? Click the button below to start your booking process. We can't wait to work with you!
                         </p>
 
                         <div className={styles.contactDetails}>
@@ -28,51 +31,20 @@ const BookingForm = () => {
                                 <span>Hyderabad, India</span>
                             </div>
                         </div>
+
+                        <div style={{ marginTop: '30px' }}>
+                            <button onClick={openBooking} className="btn btn-gold">
+                                Start Booking
+                            </button>
+                        </div>
                     </div>
 
-                    <div className={styles.formContainer}>
-                        <h3 className={styles.formTitle}>Book a Shoot</h3>
-                        <form>
-                            <div className={styles.formGroup}>
-                                <label className={styles.label}>Full Name</label>
-                                <input type="text" className={styles.input} placeholder="John Doe" required />
-                            </div>
-
-                            <div className={styles.formGroup}>
-                                <label className={styles.label}>Email Address</label>
-                                <input type="email" className={styles.input} placeholder="john@example.com" required />
-                            </div>
-
-                            <div className={styles.formGroup}>
-                                <label className={styles.label}>Phone Number</label>
-                                <input type="tel" className={styles.input} placeholder="+91 99999 99999" required />
-                            </div>
-
-                            <div className={styles.formGroup}>
-                                <label className={styles.label}>Event Type</label>
-                                <select className={styles.select}>
-                                    <option>Wedding Photography</option>
-                                    <option>Corporate Event</option>
-                                    <option>Personal Branding</option>
-                                    <option>Music Video</option>
-                                    <option>Other</option>
-                                </select>
-                            </div>
-
-                            <div className={styles.formGroup}>
-                                <label className={styles.label}>Event Date</label>
-                                <input type="date" className={styles.input} />
-                            </div>
-
-                            <div className={styles.formGroup}>
-                                <label className={styles.label}>Message</label>
-                                <textarea className={styles.textarea} placeholder="Tell us more about your requirements..."></textarea>
-                            </div>
-
-                            <button type="button" className="btn btn-gold" style={{ width: '100%' }}>
-                                Proceed to Pay Advance (Rs. 1000)
-                            </button>
-                        </form>
+                    <div className={styles.formContainer} style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', minHeight: '300px', backgroundImage: 'url(/assets/Camshoot.jpeg)', backgroundSize: 'cover', backgroundPosition: 'center', borderRadius: '16px' }}>
+                        {/* You could put an image or a simple card here */}
+                        <div style={{ padding: '20px', backgroundColor: 'rgba(0,0,0,0.6)', color: 'white', borderRadius: '8px', textAlign: 'center' }}>
+                            <h3>Professional Shoots</h3>
+                            <p>Weddings • Events • Portraits</p>
+                        </div>
                     </div>
                 </div>
             </div>
