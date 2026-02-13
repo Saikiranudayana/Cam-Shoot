@@ -176,40 +176,121 @@ const BookingModal = () => {
     const handlePayment = async () => {
         if (!agreedToTerms) return;
 
-        // Simulate Razorpay Payment Process
-        const confirmed = window.confirm(`Proceed to pay ₹${advanceAmount.toLocaleString('en-IN')} via Razorpay?\n(This is a simulation)`);
+        try {
+            // Load Razorpay script
+            const { loadRazorpayScript } = await import('@/utils/loadRazorpay');
+            const loaded = await loadRazorpayScript();
 
-        if (confirmed) {
-            try {
-                const response = await fetch('/api/bookings', {
-                    method: 'POST',
-                    headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify({
-                        packageId: selectedPackage,
-                        packageName: currentPackage.name,
-                        packagePrice: currentPackage.price,
-                        addons: selectedAddons,
-                        totalAmount,
-                        advanceAmount,
-                        userDetails,
-                        eventDetails,
-                        paymentMethod: 'Razorpay',
-                        status: 'Paid (Advance)'
-                    })
-                });
-
-                if (response.ok) {
-                    alert(`Payment Successful! Booking Confirmed.\nYour Booking ID: ${(await response.json()).booking?.id}`);
-                    closeBooking();
-                    setStep(1); // Reset
-                    // Reset other states if needed
-                } else {
-                    alert('Booking failed. Please try again.');
-                }
-            } catch (error) {
-                console.error('Payment Error:', error);
-                alert('Payment processing error. Please try again.');
+            if (!loaded) {
+                alert('Failed to load payment gateway. Please try again.');
+                return;
             }
+
+            // Create Razorpay order
+            const orderResponse = await fetch('/api/razorpay/create-order', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ amount: advanceAmount })
+            });
+
+            const orderData = await orderResponse.json();
+
+            if (!orderData.success) {
+                alert('Failed to create order. Please try again.');
+                return;
+            }
+
+            // Razorpay checkout options
+            const options = {
+                key: process.env.NEXT_PUBLIC_RAZORPAY_KEY_ID,
+                amount: orderData.amount,
+                currency: orderData.currency,
+                name: 'CamShoot',
+                description: `${currentPackage.name} Package - Advance Payment`,
+                order_id: orderData.orderId,
+                handler: async function (response: any) {
+                    // Payment success - verify and save
+                    try {
+                        // Verify payment
+                        const verifyResponse = await fetch('/api/razorpay/verify-payment', {
+                            method: 'POST',
+                            headers: { 'Content-Type': 'application/json' },
+                            body: JSON.stringify({
+                                razorpay_order_id: response.razorpay_order_id,
+                                razorpay_payment_id: response.razorpay_payment_id,
+                                razorpay_signature: response.razorpay_signature
+                            })
+                        });
+
+                        const verifyData = await verifyResponse.json();
+
+                        if (verifyData.verified) {
+                            // Save order to Google Sheets
+                            await fetch('/api/save-order', {
+                                method: 'POST',
+                                headers: { 'Content-Type': 'application/json' },
+                                body: JSON.stringify({
+                                    orderId: orderData.customOrderId,
+                                    packageName: currentPackage.name,
+                                    packagePrice: currentPackage.price,
+                                    addons: selectedAddons,
+                                    totalAmount,
+                                    advancePaid: advanceAmount,
+                                    userDetails,
+                                    eventDetails,
+                                    paymentId: response.razorpay_payment_id,
+                                    paymentStatus: 'Success'
+                                })
+                            });
+
+                            // Redirect to success page with order details
+                            const successUrl = new URL('/success', window.location.origin);
+                            successUrl.searchParams.set('orderId', orderData.customOrderId);
+                            successUrl.searchParams.set('paymentId', response.razorpay_payment_id);
+                            successUrl.searchParams.set('customerName', `${userDetails.firstName} ${userDetails.lastName}`);
+                            successUrl.searchParams.set('email', userDetails.email);
+                            successUrl.searchParams.set('phone', userDetails.phone);
+                            successUrl.searchParams.set('packageName', currentPackage.name);
+                            successUrl.searchParams.set('addons', selectedAddons.join(','));
+                            successUrl.searchParams.set('totalAmount', totalAmount.toString());
+                            successUrl.searchParams.set('advancePaid', advanceAmount.toString());
+                            successUrl.searchParams.set('eventDate', eventDetails.date);
+                            successUrl.searchParams.set('eventLocation', `${eventDetails.location}, ${eventDetails.city}`);
+
+                            closeBooking();
+                            setStep(1); // Reset
+
+                            // Redirect to success page
+                            window.location.href = successUrl.toString();
+                        } else {
+                            alert('Payment verification failed. Please contact support.');
+                        }
+                    } catch (error) {
+                        console.error('Error saving order:', error);
+                        alert('Payment successful but failed to save order. Please contact support with your payment ID.');
+                    }
+                },
+                prefill: {
+                    name: `${userDetails.firstName} ${userDetails.lastName}`,
+                    email: userDetails.email,
+                    contact: userDetails.phone
+                },
+                theme: {
+                    color: '#D4AF37' // Gold color matching your theme
+                },
+                modal: {
+                    ondismiss: function () {
+                        console.log('Payment modal closed');
+                    }
+                }
+            };
+
+            const paymentObject = new (window as any).Razorpay(options);
+            paymentObject.open();
+
+        } catch (error) {
+            console.error('Payment error:', error);
+            alert('Payment failed. Please try again.');
         }
     };
 

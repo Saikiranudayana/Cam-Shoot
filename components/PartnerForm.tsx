@@ -18,6 +18,7 @@ const PartnerForm = () => {
     });
 
     const [status, setStatus] = useState<'idle' | 'submitting' | 'success' | 'error'>('idle');
+    const [applicationId, setApplicationId] = useState<string>('');
 
     const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement>) => {
         const { name, value } = e.target;
@@ -36,6 +37,8 @@ const PartnerForm = () => {
             });
 
             if (response.ok) {
+                const data = await response.json();
+                setApplicationId(data.applicationId);
                 setStatus('success');
                 setFormData({
                     fullName: '', gender: '', whatsapp: '', email: '', portfolio: '',
@@ -53,9 +56,15 @@ const PartnerForm = () => {
     if (status === 'success') {
         return (
             <div className={styles.successMessage}>
-                <h2>Application Submitted! 🎉</h2>
-                <p>Thank you for your interest in partnering with CamShoot. We will review your details and get back to you soon.</p>
-                <button onClick={() => setStatus('idle')} className="btn btn-gold">Submit Another</button>
+                <div className={styles.successIcon}>✓</div>
+                <h2>Application Submitted Successfully! 🎉</h2>
+                <div className={styles.applicationId}>
+                    <strong>Application ID:</strong> {applicationId}
+                </div>
+                <p>Thank you for your interest in partnering with CamShoot.</p>
+                <p>We will review your application and get back to you within 2-3 business days.</p>
+                <p className={styles.note}>💡 Please save your Application ID for future reference</p>
+                <button onClick={() => setStatus('idle')} className="btn btn-gold">Submit Another Application</button>
             </div>
         );
     }

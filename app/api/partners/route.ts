@@ -1,110 +1,68 @@
-import { NextResponse } from 'next/server';
-import { GoogleSpreadsheet } from 'google-spreadsheet';
-import { JWT } from 'google-auth-library';
-import Airtable from 'airtable';
+import { NextRequest, NextResponse } from 'next/server';
+import { savePartnerToGoogleSheets, generateApplicationId, PartnerData } from '@/lib/partnerSheets';
 
-// Environment variables
-const AIRTABLE_API_KEY = process.env.AIRTABLE_API_KEY;
-const AIRTABLE_BASE_ID = process.env.AIRTABLE_BASE_ID;
-const AIRTABLE_PARTNERS_TABLE = 'Partners'; // Ensure this table exists in Airtable
-
-// Google Sheets Env Vars (Optional - if user wants direct sheet integration)
-const GOOGLE_SERVICE_ACCOUNT_EMAIL = process.env.GOOGLE_SERVICE_ACCOUNT_EMAIL;
-const GOOGLE_PRIVATE_KEY = process.env.GOOGLE_PRIVATE_KEY;
-const GOOGLE_SHEET_ID = process.env.GOOGLE_SHEET_ID;
-
-export async function POST(request: Request) {
-    console.log('--- Partner Submission Logic Start ---');
+export async function POST(request: NextRequest) {
     try {
-        const data = await request.json();
+        const body = await request.json();
 
-        // Debug: Check which vars are present (Do NOT log actual keys)
-        console.log('Checking Environment Variables:');
-        console.log('GOOGLE_EMAIL:', !!GOOGLE_SERVICE_ACCOUNT_EMAIL);
-        console.log('GOOGLE_KEY:', !!GOOGLE_PRIVATE_KEY);
-        console.log('GOOGLE_SHEET_ID:', !!GOOGLE_SHEET_ID);
-        console.log('AIRTABLE_KEY:', !!AIRTABLE_API_KEY);
+        console.log('📥 Received partner application:', JSON.stringify(body, null, 2));
 
-        // Strategy 1: Try Google Sheets
-        if (GOOGLE_SERVICE_ACCOUNT_EMAIL && GOOGLE_PRIVATE_KEY && GOOGLE_SHEET_ID) {
-            console.log('Attempting Google Sheets integration...');
-            try {
-                // Fix potential newline issues in private key
-                const privateKey = GOOGLE_PRIVATE_KEY.split(String.raw`\n`).join('\n');
-                console.log('Private Key formatted successfully. Length:', privateKey.length);
+        // Validate required fields
+        const requiredFields = ['fullName', 'gender', 'whatsapp', 'email', 'portfolio', 'location', 'experience', 'ownKit', 'hasLaptop', 'hasVehicle', 'reason'];
+        const missingFields = requiredFields.filter(field => !body[field]);
 
-                const serviceAccountAuth = new JWT({
-                    email: GOOGLE_SERVICE_ACCOUNT_EMAIL,
-                    key: privateKey,
-                    scopes: ['https://www.googleapis.com/auth/spreadsheets'],
-                });
-
-                const doc = new GoogleSpreadsheet(GOOGLE_SHEET_ID, serviceAccountAuth);
-                await doc.loadInfo();
-                console.log('Connected to Google Sheet:', doc.title);
-
-                const sheet = doc.sheetsByIndex[0];
-
-                // Check headers
-                await sheet.loadHeaderRow();
-                if (sheet.headerValues.length === 0) {
-                    console.log('Sheet is empty. Adding headers...');
-                    await sheet.setHeaderRow([
-                        'fullName', 'gender', 'whatsapp', 'email', 'portfolio',
-                        'location', 'experience', 'ownKit', 'hasLaptop', 'hasVehicle', 'reason'
-                    ]);
-                }
-
-                await sheet.addRow(data);
-                console.log('Row added to Google Sheet successfully.');
-
-                return NextResponse.json({ success: true, method: 'google-sheet' });
-            } catch (sheetError) {
-                console.error('❌ Google Sheet Error:', sheetError);
-                // Continue to fallback
-            }
-        } else {
-            console.log('Skipping Google Sheets: Missing credentials.');
+        if (missingFields.length > 0) {
+            console.error('❌ Missing required fields:', missingFields);
+            return NextResponse.json(
+                { error: `Missing required fields: ${missingFields.join(', ')}` },
+                { status: 400 }
+            );
         }
 
-        // Strategy 2: Use Airtable
-        if (AIRTABLE_API_KEY && AIRTABLE_BASE_ID && AIRTABLE_API_KEY !== 'YOUR_AIRTABLE_PAT') {
-            console.log('Attempting Airtable integration...');
-            try {
-                const base = new Airtable({ apiKey: AIRTABLE_API_KEY }).base(AIRTABLE_BASE_ID);
+        // Generate unique application ID
+        const applicationId = generateApplicationId();
 
-                await base(AIRTABLE_PARTNERS_TABLE).create([
-                    {
-                        fields: {
-                            'Full Name': data.fullName,
-                            'Gender': data.gender,
-                            'WhatsApp Number': data.whatsapp,
-                            'Email Address': data.email,
-                            'Portfolio Link': data.portfolio,
-                            'Location': data.location,
-                            'Experience (Reels)': data.experience,
-                            'Own Kit': data.ownKit,
-                            'Has Laptop': data.hasLaptop,
-                            'Has Vehicle': data.hasVehicle,
-                            'Reason': data.reason,
-                            'Application Date': new Date().toISOString()
-                        }
-                    }
-                ]);
-                console.log('Row added to Airtable successfully.');
-                return NextResponse.json({ success: true, method: 'airtable' });
-            } catch (airtableError) {
-                console.error('❌ Airtable Error:', airtableError);
-            }
-        }
+        // Prepare partner data for Google Sheets
+        const partnerData: PartnerData = {
+            applicationId,
+            dateTime: new Date().toLocaleString('en-IN', { timeZone: 'Asia/Kolkata' }),
+            fullName: body.fullName,
+            gender: body.gender,
+            whatsapp: body.whatsapp,
+            email: body.email,
+            portfolio: body.portfolio,
+            location: body.location,
+            experience: body.experience,
+            ownKit: body.ownKit,
+            hasLaptop: body.hasLaptop,
+            hasVehicle: body.hasVehicle,
+            reason: body.reason,
+            status: 'Pending Review',
+        };
 
-        // Strategy 3: Console Log Fallback
-        console.log('Fallback: Logging to console only.');
-        console.log('Partner Application Data:', data);
-        return NextResponse.json({ success: true, method: 'console-log' });
+        console.log('📊 Prepared partner data for Google Sheets:', partnerData);
 
+        // Save to Google Sheets
+        console.log('💾 Saving partner application to Google Sheets...');
+        await savePartnerToGoogleSheets(partnerData);
+        console.log('✅ Successfully saved partner application to Google Sheets!');
+
+        return NextResponse.json({
+            success: true,
+            message: 'Partner application submitted successfully',
+            applicationId: applicationId,
+        });
     } catch (error) {
-        console.error('❌ General Partner API Error:', error);
-        return NextResponse.json({ error: 'Failed to submit application' }, { status: 500 });
+        console.error('❌ Error saving partner application:', error);
+        console.error('Error details:', error instanceof Error ? error.message : String(error));
+        console.error('Stack trace:', error instanceof Error ? error.stack : 'No stack trace');
+
+        return NextResponse.json(
+            {
+                error: 'Failed to submit partner application',
+                details: error instanceof Error ? error.message : String(error)
+            },
+            { status: 500 }
+        );
     }
 }
