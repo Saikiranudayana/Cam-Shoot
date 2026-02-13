@@ -1,5 +1,5 @@
 "use client";
-import { useEffect, useState } from 'react';
+import { useEffect, useState, Suspense } from 'react';
 import { useSearchParams, useRouter } from 'next/navigation';
 import styles from './success.module.css';
 
@@ -18,6 +18,21 @@ interface OrderDetails {
 }
 
 export default function SuccessPage() {
+    return (
+        <Suspense fallback={
+            <div className={styles.container}>
+                <div className={styles.loading}>
+                    <div className={styles.spinner}></div>
+                    <p>Loading...</p>
+                </div>
+            </div>
+        }>
+            <SuccessContent />
+        </Suspense>
+    );
+}
+
+function SuccessContent() {
     const searchParams = useSearchParams();
     const router = useRouter();
     const [orderDetails, setOrderDetails] = useState<OrderDetails | null>(null);
