@@ -6,6 +6,20 @@ import styles from './Hero.module.css';
 const Hero = () => {
     const { openBooking } = useBooking();
 
+    const scrollToSection = (sectionId: string) => {
+        const element = document.getElementById(sectionId);
+        if (element) {
+            const headerOffset = 80;
+            const elementPosition = element.getBoundingClientRect().top;
+            const offsetPosition = elementPosition + window.pageYOffset - headerOffset;
+
+            window.scrollTo({
+                top: offsetPosition,
+                behavior: 'smooth'
+            });
+        }
+    };
+
     return (
         <section className={styles.hero}>
             {/* Background Image - Placeholder until we set correct path */}
@@ -39,9 +53,9 @@ const Hero = () => {
                     <button onClick={openBooking} className="btn btn-gold">
                         Book a Shoot
                     </button>
-                    <Link href="/portfolio" className="btn btn-outline" style={{ color: 'white', borderColor: 'white' }}>
+                    <button onClick={() => scrollToSection('portfolio')} className="btn btn-outline" style={{ color: 'white', borderColor: 'white' }}>
                         View Portfolio
-                    </Link>
+                    </button>
                     <Link href="/partner" className="btn btn-outline" style={{ color: '#F4D06F', borderColor: '#F4D06F', marginLeft: '10px' }}>
                         Become a Partner
                     </Link>

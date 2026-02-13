@@ -7,11 +7,21 @@ import BookingForm from "@/components/BookingForm";
 export default function Home() {
   return (
     <main>
-      <Hero />
-      <About />
-      <Services />
-      <Portfolio />
-      <BookingForm />
+      <section id="home">
+        <Hero />
+      </section>
+      <section id="about">
+        <About />
+      </section>
+      <section id="services">
+        <Services />
+      </section>
+      <section id="portfolio">
+        <Portfolio />
+      </section>
+      <section id="contact">
+        <BookingForm />
+      </section>
       {/* Footer will go in Layout */}
     </main>
   );

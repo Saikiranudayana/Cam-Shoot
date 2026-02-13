@@ -19,8 +19,24 @@ const outfit = Outfit({
 });
 
 export const metadata: Metadata = {
-  title: "CamShoot | We Shoot the Moment, We Deliver the Emotion",
-  description: "Professional cinematography and photography services by CamShoot.",
+  title: "CamShoot | Professional Cinematography & Photography Hyderabad",
+  description: "Capture your most precious moments with professional cinematography and photography. Specializing in weddings, events, and brand storytelling in Hyderabad, India.",
+  icons: {
+    icon: "/icon.png",
+    apple: "/apple-icon.png",
+  },
+  openGraph: {
+    title: "CamShoot | Professional Cinematography & Photography Hyderabad",
+    description: "Capture your most precious moments with professional cinematography and photography. Specializing in weddings, events, and brand storytelling in Hyderabad, India.",
+    images: ["/assets/logo.png"],
+    type: "website",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "CamShoot | Professional Cinematography & Photography Hyderabad",
+    description: "Capture your most precious moments with professional cinematography and photography. Specializing in weddings, events, and brand storytelling in Hyderabad, India.",
+    images: ["/assets/logo.png"],
+  },
 };
 
 export default function RootLayout({

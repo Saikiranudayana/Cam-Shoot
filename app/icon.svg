@@ -1,0 +1,15 @@
+<svg width="64" height="64" viewBox="0 0 64 64" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="iconExactBolt" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#FDB44B;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#E67E22;stop-opacity:1" />
+    </linearGradient>
+  </defs>
+  
+  <!-- Black circular background -->
+  <circle cx="32" cy="32" r="32" fill="#000000"/>
+  
+  <!-- Lightning bolt centered - exact style -->
+  <path d="M 36 14 L 30 28 L 34 28 L 26 50 L 42 30 L 36 30 L 44 14 Z" 
+        fill="url(#iconExactBolt)"/>
+</svg>

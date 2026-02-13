@@ -1,0 +1,32 @@
+<svg width="600" height="200" viewBox="0 0 600 200" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="exactBoltWhite" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#FDB44B;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#E67E22;stop-opacity:1" />
+    </linearGradient>
+  </defs>
+  
+  <g transform="translate(100, 130)">
+    <!-- CAM text - exact italic style -->
+    <text x="0" y="0" 
+          font-family="'Impact', 'Arial Black', sans-serif" 
+          font-weight="400" 
+          font-style="italic"
+          font-size="65" 
+          fill="#000000" 
+          letter-spacing="0">CAM</text>
+    
+    <!-- Lightning bolt 'S' - exact shape from image -->
+    <path d="M 155 -60 L 140 -18 L 152 -18 L 130 35 L 172 -26 L 155 -26 L 177 -60 Z" 
+          fill="url(#exactBoltWhite)"/>
+    
+    <!-- HOOT text - exact italic style -->
+    <text x="182" y="0" 
+          font-family="'Impact', 'Arial Black', sans-serif" 
+          font-weight="400" 
+          font-style="italic"
+          font-size="65" 
+          fill="#000000" 
+          letter-spacing="0">HOOT</text>
+  </g>
+</svg>
