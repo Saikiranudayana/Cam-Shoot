@@ -35,7 +35,7 @@ export async function POST(request: NextRequest) {
             verified: true,
             paymentId: razorpay_payment_id,
             orderId: razorpay_order_id,
-            amount: paymentDetails.amount / 100, // Convert from paise to rupees
+            amount: Number(paymentDetails.amount) / 100, // Convert from paise to rupees
             status: paymentDetails.status,
             method: paymentDetails.method,
         });
