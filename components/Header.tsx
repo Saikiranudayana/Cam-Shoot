@@ -39,7 +39,7 @@ const Header = () => {
                 </nav>
 
                 <div className={styles.actions}>
-                    <button onClick={openBooking} className="btn btn-gold" style={{ padding: '10px 24px', fontSize: '0.9rem' }}>
+                    <button onClick={() => openBooking()} className="btn btn-gold" style={{ padding: '10px 24px', fontSize: '0.9rem' }}>
                         Book Now
                     </button>
                 </div>
