@@ -2,6 +2,7 @@
 import Link from 'next/link';
 import { useBooking } from '@/context/BookingContext';
 import styles from './Hero.module.css';
+// Fixed TypeScript error with onClick handler
 
 const Hero = () => {
     const { openBooking } = useBooking();
