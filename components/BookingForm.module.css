@@ -80,24 +80,92 @@
     margin-bottom: 40px;
 }
 
-.contactDetails div {
-    margin-bottom: 20px;
-    display: flex;
-    align-items: center;
-    gap: 15px;
-    font-size: 1.1rem;
-    font-weight: 500;
+.contactDetails {
+    background: #fff;
+    padding: 30px;
+    border-radius: 12px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+    /* Slight shadow to match card in image */
+    margin-bottom: 30px;
 }
 
-.contactIcon {
-    width: 40px;
-    height: 40px;
-    background: rgba(212, 175, 55, 0.1);
+.contactItem {
+    margin-bottom: 24px;
+    display: flex;
+    align-items: center;
+    gap: 16px;
+}
+
+.contactItem:last-child {
+    margin-bottom: 0;
+}
+
+.iconCircle {
+    width: 48px;
+    height: 48px;
+    background: #fa8112;
+    /* Solid Theme Orange */
     border-radius: 50%;
     display: flex;
     justify-content: center;
     align-items: center;
-    color: var(--color-gold);
+    color: white;
+    flex-shrink: 0;
+}
+
+.contactText {
+    display: flex;
+    flex-direction: column;
+}
+
+.contactLabel {
+    font-size: 0.9rem;
+    font-weight: 700;
+    color: #333;
+    margin-bottom: 2px;
+}
+
+.contactValue {
+    font-size: 1rem;
+    color: #666;
+}
+
+/* Follow Us Section */
+.followUs {
+    margin-top: 30px;
+    background: #fff;
+    padding: 30px;
+    border-radius: 12px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+}
+
+.followUsTitle {
+    font-family: var(--font-heading);
+    font-size: 1.25rem;
+    font-weight: 700;
+    margin-bottom: 16px;
+    color: #333;
+}
+
+.socialIcons {
+    display: flex;
+    gap: 16px;
+}
+
+.socialIconLink {
+    width: 40px;
+    height: 40px;
+    background: #fa8112;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: white;
+    transition: transform 0.2s;
+}
+
+.socialIconLink:hover {
+    transform: scale(1.1);
 }
 
 @media (max-width: 900px) {

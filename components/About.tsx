@@ -14,20 +14,7 @@ const About = () => {
                     From weddings to corporate events, we bring a creative eye and technical excellence to every project, ensuring your memories are preserved in stunning detail.
                 </p>
 
-                <div className={styles.statsGrid}>
-                    <div className={styles.statItem}>
-                        <h3>5+</h3>
-                        <p>Years Experience</p>
-                    </div>
-                    <div className={styles.statItem}>
-                        <h3>200+</h3>
-                        <p>Projects Delivered</p>
-                    </div>
-                    <div className={styles.statItem}>
-                        <h3>100%</h3>
-                        <p>Client Satisfaction</p>
-                    </div>
-                </div>
+
             </div>
         </section>
     );

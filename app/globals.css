@@ -1,7 +1,12 @@
 :root {
-  --color-gold: #D4AF37;
-  --color-gold-light: #F4D06F;
-  --color-gold-dark: #AA8C2C;
+  /* Updated to Orange Theme - User Request #fa8112 */
+  --color-gold: #fa8112;
+  /* The requested orange */
+  --color-gold-light: #fb9d45;
+  /* Lighter version */
+  --color-gold-dark: #cc660a;
+  /* Darker version */
+
   --color-black: #121212;
   --color-dark-gray: #1a1a1a;
   --color-white: #ffffff;
@@ -24,7 +29,9 @@ body {
   overflow-x: hidden;
   background-color: var(--color-white);
   color: var(--color-black);
-  font-family: var(--font-body), sans-serif;
+  font-family: 'Arial', sans-serif;
+  font-size: 18px;
+  /* Increased base font size */
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
@@ -90,7 +97,7 @@ a {
 .btn-gold:hover {
   background-color: var(--color-gold-dark);
   transform: translateY(-2px);
-  box-shadow: 0 4px 15px rgba(212, 175, 55, 0.3);
+  box-shadow: 0 4px 15px rgba(255, 77, 0, 0.3);
 }
 
 .btn-outline {

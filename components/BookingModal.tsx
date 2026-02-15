@@ -3,6 +3,43 @@ import React, { useState, useEffect } from 'react';
 import { useBooking } from '@/context/BookingContext';
 import styles from './BookingModal.module.css';
 
+// --- Icons (Matching Packages.tsx) ---
+
+// SVG Icons matching the reference style (Outline, Orange Theme)
+const VideoIcon = () => (
+    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+        <path d="M23 7l-7 5 7 5V7z" />
+        <rect x="1" y="5" width="15" height="14" rx="2" ry="2" />
+    </svg>
+);
+
+const ClockIcon = () => (
+    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+        <circle cx="12" cy="12" r="10" />
+        <polyline points="12 6 12 12 16 14" />
+    </svg>
+);
+
+const EditIcon = () => (
+    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+        <path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7" />
+        <path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z" />
+    </svg>
+);
+
+const CameraIcon = () => (
+    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+        <path d="M23 19a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4l2-3h6l2 3h4a2 2 0 0 1 2 2z" />
+        <circle cx="12" cy="13" r="4" />
+    </svg>
+);
+
+const StarIcon = () => (
+    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+        <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2" />
+    </svg>
+);
+
 // --- Constants & Types ---
 
 type PackageId = 'pro' | 'pro_plus' | 'pro_max';
@@ -113,15 +150,26 @@ const BookingModal = () => {
 
     const [agreedToTerms, setAgreedToTerms] = useState(false);
 
-    // Reset step when closed
+    // Reset step when closed, and update package when opened
     useEffect(() => {
         if (!isBookingOpen) {
-            // Optional: reset form or just keep it? Let's keep it for UX in case accidental close.
-            // But maybe reset step to 1.
             const timer = setTimeout(() => setStep(1), 300);
             return () => clearTimeout(timer);
         }
     }, [isBookingOpen]);
+
+    // New effect to handle pre-selection and auto-advance
+    const { preSelectedPackage } = useBooking(); // We need to access this from context
+    useEffect(() => {
+        if (isBookingOpen && preSelectedPackage) {
+            // Validate if package exists
+            const exists = PACKAGES.find(p => p.id === preSelectedPackage);
+            if (exists) {
+                setSelectedPackage(preSelectedPackage as PackageId);
+                setStep(2); // Auto-advance to add-ons step
+            }
+        }
+    }, [isBookingOpen, preSelectedPackage]);
 
     if (!isBookingOpen) return null;
 
@@ -353,12 +401,14 @@ const BookingModal = () => {
                                         <div className={styles.pkgBody}>
                                             <ul className={styles.pkgFeatures}>
                                                 {pkg.features.map((f, i) => {
-                                                    let icon = '⚡';
-                                                    if (f.toLowerCase().includes('reel')) icon = '🎥';
-                                                    if (f.toLowerCase().includes('4k')) icon = '✨';
-                                                    if (f.toLowerCase().includes('shoot')) icon = '🕒';
-                                                    if (f.toLowerCase().includes('edit') || f.toLowerCase().includes('delivery')) icon = '🎬';
-                                                    if (f.toLowerCase().includes('raw')) icon = '🚫';
+                                                    let icon = <StarIcon />; // Default
+                                                    const text = f.toLowerCase();
+                                                    if (text.includes('reel')) icon = <VideoIcon />;
+                                                    else if (text.includes('4k')) icon = <StarIcon />;
+                                                    else if (text.includes('shoot')) icon = <ClockIcon />;
+                                                    else if (text.includes('edit') || text.includes('delivery')) icon = <EditIcon />;
+                                                    else if (text.includes('raw')) icon = <CameraIcon />;
+
                                                     return (
                                                         <li key={i}><span className={styles.pkgIcon}>{icon}</span> {f}</li>
                                                     );
@@ -372,7 +422,7 @@ const BookingModal = () => {
 
                                         <div
                                             className={styles.pkgDrone}
-                                            style={{ backgroundColor: isDroneActive ? '#F4D06F' : '#FFF2CC', cursor: 'pointer' }}
+                                            style={{ backgroundColor: isDroneActive ? 'var(--color-gold-light)' : '#FFF8E1', cursor: 'pointer', borderTop: '1px solid var(--color-gold)' }}
                                             onClick={(e) => {
                                                 e.stopPropagation();
                                                 if (!isSelected) setSelectedPackage(pkg.id);
@@ -380,15 +430,22 @@ const BookingModal = () => {
                                             }}
                                         >
                                             <div className={styles.droneLabel}>
-                                                <span>🚁 Include Drone Shoot</span>
+                                                {/* Drone SVG Icon */}
+                                                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" style={{ color: 'var(--color-gold)' }}>
+                                                    <path d="M12 22a9 9 0 0 0 9-9 9 9 0 0 0-9-9 9 9 0 0 0-9 9 9 9 0 0 0 9 9z" />
+                                                    <path d="M12 2v20" />
+                                                    <path d="M2 12h20" />
+                                                    <path d="M12 12m-3 0a3 3 0 1 0 6 0a3 3 0 1 0 -6 0" />
+                                                </svg>
+                                                <span style={{ color: '#333' }}>Include Drone Shoot</span>
                                                 <input
                                                     type="checkbox"
                                                     checked={selectedAddons.includes('drone') && isSelected}
                                                     readOnly
-                                                    style={{ transform: 'scale(1.5)', accentColor: '#000', marginLeft: '8px' }}
+                                                    style={{ transform: 'scale(1.5)', accentColor: '#fa8112', marginLeft: '8px' }}
                                                 />
                                             </div>
-                                            <span className={styles.dronePrice}>₹{dronePrice.toLocaleString('en-IN')} /-</span>
+                                            <span className={styles.dronePrice} style={{ backgroundColor: '#fa8112', color: 'white' }}>₹{dronePrice.toLocaleString('en-IN')} /-</span>
                                         </div>
                                     </div>
                                 );
@@ -400,7 +457,7 @@ const BookingModal = () => {
                     {step === 2 && (
                         <div className={styles.grid}>
                             <p style={{ marginBottom: '10px', fontSize: '0.95rem' }}>Enhance your selected <strong>{currentPackage.name}</strong> package.</p>
-                            {ADDONS.filter(a => a.id !== 'drone').map(addon => {
+                            {ADDONS.map(addon => {
                                 const price = addon.getPrice(selectedPackage);
                                 const isSelected = selectedAddons.includes(addon.id);
                                 return (

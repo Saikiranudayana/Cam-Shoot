@@ -22,22 +22,7 @@ const Hero = () => {
 
     return (
         <section className={styles.hero}>
-            {/* Background Image - Placeholder until we set correct path */}
-            <div
-                style={{
-                    position: 'absolute',
-                    top: 0,
-                    left: 0,
-                    width: '100%',
-                    height: '100%',
-                    backgroundImage: 'url(/assets/Camshoot.jpeg)',
-                    backgroundSize: 'cover',
-                    backgroundPosition: 'center',
-                    zIndex: 0
-                }}
-            />
 
-            <div className={styles.overlay} />
 
             <div className={styles.content}>
                 <h1 className={styles.title}>
@@ -53,10 +38,8 @@ const Hero = () => {
                     <button onClick={openBooking} className="btn btn-gold">
                         Book a Shoot
                     </button>
-                    <button onClick={() => scrollToSection('portfolio')} className="btn btn-outline" style={{ color: 'white', borderColor: 'white' }}>
-                        View Portfolio
-                    </button>
-                    <Link href="/partner" className="btn btn-outline" style={{ color: '#F4D06F', borderColor: '#F4D06F', marginLeft: '10px' }}>
+
+                    <Link href="/partner" className="btn btn-outline" style={{ color: 'var(--color-gold)', borderColor: 'var(--color-gold)', marginLeft: '10px' }}>
                         Become a Partner
                     </Link>
                 </div>

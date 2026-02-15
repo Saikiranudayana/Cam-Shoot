@@ -1,0 +1,63 @@
+.section {
+    padding: 60px 20px;
+    background-color: #fff;
+    /* Clean white background for section or transparent if on hero */
+}
+
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.card {
+    background: white;
+    border-radius: 8px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+    border: 1px solid #eee;
+    width: 100%;
+    max-width: 600px;
+    padding: 20px;
+}
+
+.headerContainer {
+    margin-bottom: 20px;
+}
+
+.header {
+    background-color: var(--color-gold);
+    /* Orange color */
+    color: white;
+    padding: 12px;
+    text-align: center;
+    font-weight: 800;
+    text-transform: uppercase;
+    font-family: var(--font-heading);
+    letter-spacing: 0.5px;
+    font-size: 1.1rem;
+    border-radius: 6px;
+    /* Rounded corners like pill/button */
+}
+
+.cardBody {
+    padding: 0 10px;
+}
+
+.row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 15px 0;
+    font-family: var(--font-body);
+}
+
+.itemName {
+    font-size: 1rem;
+    color: #444;
+    font-weight: 500;
+}
+
+.price {
+    font-weight: 800;
+    color: var(--color-black);
+    font-size: 1.1rem;
+}

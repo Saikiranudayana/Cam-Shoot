@@ -105,50 +105,50 @@
     margin-top: 10px;
 }
 
-/* Card Styling - Gold Theme */
+/* Card Styling - Gold/Orange Theme */
 .pkgCard {
-    border: 2px solid transparent;
-    /* Highlight on select */
+    border: 2px solid #eee;
     border-radius: 12px;
     overflow: hidden;
     cursor: pointer;
     transition: all 0.3s ease;
-    background: #FFFACD;
-    /* Light lemon chiffon / gold tint */
+    background: #fff;
     display: flex;
     flex-direction: column;
     justify-content: space-between;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
 }
 
 .pkgCardSelected {
     border-color: var(--color-gold);
     transform: scale(1.02);
-    box-shadow: 0 8px 15px rgba(212, 175, 55, 0.3);
+    box-shadow: 0 8px 20px rgba(255, 77, 0, 0.15);
+    /* Orange shadow */
 }
 
 /* Header Section */
 .pkgHeader {
-    background: linear-gradient(135deg, #F4D06F 0%, #E6C25B 100%);
+    background: var(--color-gold);
+    /* Solid Orange */
     padding: 15px;
     text-align: center;
-    color: #000;
+    color: white;
 }
 
 .pkgName {
     font-family: var(--font-heading);
     font-size: 1.4rem;
-    /* Bigger font */
     font-weight: 800;
     margin: 0;
     text-transform: uppercase;
+    color: white;
 }
 
 /* Features List */
 .pkgBody {
     padding: 15px;
     flex: 1;
-    /* Pushes price to bottom */
+    background-color: #fff;
 }
 
 .pkgFeatures {
@@ -158,40 +158,48 @@
 }
 
 .pkgFeatures li {
-    font-size: 1rem;
-    /* Bigger font */
+    font-size: 0.95rem;
     margin-bottom: 8px;
     display: flex;
     align-items: center;
     gap: 8px;
     line-height: 1.4;
+    color: #444;
 }
 
 .pkgIcon {
     font-size: 1.2rem;
+    color: var(--color-gold);
 }
 
 /* Price Bar */
 .pkgPriceBar {
-    background: #4ADE80;
-    /* Green similar to reference */
-    padding: 10px;
+    background: #1a1a1a;
+    /* Black price bar for contrast or Orange? Reference image used Green. User wants Orange theme. */
+    /* Let's try Orange background with White text, or Black background with White text. 
+       The user said "exact orange theme one". 
+       The main packages page uses White cards. 
+       Let's stick to Orange Price Bar for "Theme" or Black.
+       If we look at the Addons component I just made, it has Black footer. 
+       Let's use Orange for consistency with "Next Step" buttons. */
+    background: var(--color-gold);
+    padding: 12px;
     text-align: center;
     font-weight: 800;
-    font-size: 1.3rem;
-    color: #064E3B;
+    font-size: 1.4rem;
+    color: white;
 }
 
 /* Drone Option */
 .pkgDrone {
-    background: #FFF2CC;
-    /* Slightly darker gold tint */
+    background: #FFF8E1;
+    /* Very light orange/cream */
     padding: 10px;
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    border-top: 1px dashed #D4AF37;
+    border-top: 1px solid #ffe0b2;
 }
 
 .droneLabel {

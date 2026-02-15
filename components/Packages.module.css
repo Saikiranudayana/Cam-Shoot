@@ -1,0 +1,193 @@
+.packages {
+    padding: 80px 20px;
+    background-color: #fcfcfc;
+    /* White/Light background */
+}
+
+.headerContainer {
+    text-align: center;
+    margin-bottom: 60px;
+}
+
+.title {
+    font-family: var(--font-heading);
+    font-size: 3rem;
+    font-weight: 900;
+    margin-bottom: 15px;
+    text-transform: uppercase;
+    color: var(--color-black);
+}
+
+.subtitle {
+    font-size: 1.1rem;
+    color: #666;
+    max-width: 600px;
+    margin: 0 auto;
+    line-height: 1.6;
+}
+
+.grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 30px;
+    max-width: 1200px;
+    margin: 0 auto;
+    align-items: flex-start;
+    /* Align specifically to top so heights match naturally or flex stretch */
+}
+
+.card {
+    background: white;
+    border-radius: 12px;
+    border: 1px solid #eaeaea;
+    /* Faint border */
+    /* box-shadow: 0 5px 20px rgba(0, 0, 0, 0.05); */
+    /* Minimal shadow or no shadow like image */
+    display: flex;
+    flex-direction: column;
+    position: relative;
+    padding: 30px;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+/* Add border color on hover or active state if needed, but image shows clean specific borders. 
+   Actually, the Popular ones in image have an Orange border.
+*/
+.popularCard {
+    border: 1px solid var(--color-gold);
+}
+
+.card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
+}
+
+.popularBadge {
+    position: absolute;
+    top: -15px;
+    left: 50%;
+    transform: translateX(-50%);
+    background-color: var(--color-gold);
+    color: white;
+    padding: 5px 20px;
+    border-radius: 20px;
+    font-weight: 700;
+    font-size: 0.85rem;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    z-index: 2;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.cardHeader {
+    width: 100%;
+    padding: 12px;
+    border-radius: 6px;
+    text-align: center;
+    color: white;
+    font-family: var(--font-heading);
+    font-weight: 800;
+    font-size: 1.5rem;
+    text-transform: uppercase;
+    margin-bottom: 30px;
+}
+
+.headerOrange {
+    background-color: var(--color-gold);
+}
+
+.headerBlack {
+    background-color: var(--color-gold);
+    /* User asked for 'exact theme', but image has first one orange too? 
+    Wait, looking at image: Smart Shot header looks Orange actually. 
+    The BUTTON at bottom is black. 
+    Let's make ALL headers Orange to be consistent with 'Theme'. 
+    Wait, looking at image closely: "SMART SHOT" header background is ORANGE. 
+    "XPRESS PRO" header is ORANGE. 
+    "XPRESS PRO+" header is ORANGE. 
+    Okay, all headers are Orange. 
+    Only the bottom button differs. */
+    background-color: var(--color-gold);
+}
+
+.cardBody {
+    flex-grow: 1;
+    margin-bottom: 30px;
+}
+
+.features {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.features li {
+    padding: 10px 0;
+    font-size: 1rem;
+    color: #444;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    font-weight: 500;
+    border-bottom: 0px;
+    /* Clean/No border separators in this design */
+}
+
+.icon {
+    font-size: 1.2rem;
+    color: var(--color-gold);
+    min-width: 24px;
+    text-align: center;
+}
+
+.priceContainer {
+    text-align: center;
+    margin-bottom: 25px;
+}
+
+.price {
+    font-size: 2.5rem;
+    color: var(--color-black);
+    font-weight: 800;
+}
+
+.actionContainer {
+    text-align: center;
+}
+
+.chooseBtn {
+    width: 100%;
+    padding: 15px;
+    border: none;
+    border-radius: 6px;
+    font-weight: 700;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: background 0.3s ease;
+    text-transform: uppercase;
+}
+
+.btnBlack {
+    background-color: #1a1a1a;
+    color: white;
+}
+
+.btnBlack:hover {
+    background-color: #333;
+}
+
+.btnOrange {
+    background-color: var(--color-gold);
+    color: white;
+}
+
+.btnOrange:hover {
+    background-color: var(--color-gold-dark);
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+    .title {
+        font-size: 2rem;
+    }
+}

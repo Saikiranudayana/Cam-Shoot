@@ -213,7 +213,7 @@ function SuccessContent() {
             yPos += 5;
             doc.text('We look forward to capturing your special moments.', 105, yPos, { align: 'center' });
             yPos += 10;
-            doc.text('For any queries, contact us at: canmshota@gmail.com | +91 99999 99999', 105, yPos, { align: 'center' });
+            doc.text('For any queries, contact us at: camshoot3313@gmail.com | +91 72070 07017', 105, yPos, { align: 'center' });
 
             // Generate timestamp
             const timestamp = new Date().toLocaleString('en-IN', { timeZone: 'Asia/Kolkata' });
@@ -352,7 +352,7 @@ function SuccessContent() {
 
                 {/* Confirmation Message */}
                 <div className={styles.confirmationNote}>
-                    <p>📱 For any queries, contact us at +91 99999 99999</p>
+                    <p>📱 For any queries, contact us at +91 72070 07017</p>
                     <p>💾 Your order has been saved and tracked with Order ID: <strong>{orderDetails.orderId}</strong></p>
                 </div>
             </div>
