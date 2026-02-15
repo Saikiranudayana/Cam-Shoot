@@ -35,7 +35,7 @@ const Hero = () => {
                 </p>
 
                 <div className={styles.buttons}>
-                    <button onClick={openBooking} className="btn btn-gold">
+                    <button onClick={() => openBooking()} className="btn btn-gold">
                         Book a Shoot
                     </button>
 
