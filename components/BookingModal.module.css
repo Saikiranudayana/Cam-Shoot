@@ -15,9 +15,10 @@
 
 .modal {
     background-color: var(--color-white);
-    width: 90%;
-    max-width: 900px;
-    max-height: 90vh;
+    width: 98%;
+    max-width: 1080px;
+    height: 94vh;
+    max-height: 94vh;
     border-radius: 16px;
     box-shadow: 0 10px 40px rgba(0, 0, 0, 0.2);
     display: flex;
@@ -242,7 +243,6 @@
 }
 
 .input,
-.select,
 .textarea {
     width: 100%;
     padding: 12px;
@@ -250,7 +250,103 @@
     border-radius: 8px;
     font-family: inherit;
     font-size: 1rem;
-    transition: border-color 0.2s;
+    transition: border-color 0.2s, box-shadow 0.2s;
+}
+
+.select {
+    width: 100%;
+    padding: 12px 14px;
+    border: 1px solid var(--color-gray-100);
+    border-radius: 8px;
+    font-family: inherit;
+    font-size: 1rem;
+    transition: border-color 0.2s, box-shadow 0.2s;
+    background-color: var(--color-white);
+    cursor: pointer;
+    appearance: none;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23666' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='6 9 12 15 18 9'/%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-position: right 14px center;
+    background-size: 18px;
+}
+
+.select:focus,
+.input:focus,
+.textarea:focus {
+    outline: none;
+    border-color: var(--color-gold);
+    box-shadow: 0 0 0 3px rgba(250, 129, 18, 0.2);
+}
+
+/* Custom dropdown (non-native select) */
+.customSelect {
+    position: relative;
+    width: 100%;
+    -webkit-tap-highlight-color: transparent;
+}
+
+.customSelectButton {
+    width: 100%;
+    padding: 12px 14px;
+    border: 1px solid var(--color-gray-100);
+    border-radius: 8px;
+    background: var(--color-white);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    cursor: pointer;
+    transition: border-color 0.2s, box-shadow 0.2s;
+    font-family: inherit;
+    font-size: 1rem;
+    user-select: none;
+}
+
+.customSelectButton:hover,
+.customSelectButton:focus {
+    border-color: var(--color-gold);
+    box-shadow: 0 0 0 3px rgba(250, 129, 18, 0.18);
+    outline: none;
+}
+
+.customSelectIcon {
+    margin-left: 10px;
+    transition: transform 0.2s ease;
+}
+
+.customSelectList {
+    position: absolute;
+    z-index: 10;
+    width: 100%;
+    background: var(--color-white);
+    border: 1px solid var(--color-gray-100);
+    border-radius: 10px;
+    box-shadow: 0 10px 28px rgba(0, 0, 0, 0.2);
+    margin-top: 6px;
+    max-height: 220px;
+    overflow-y: auto;
+    padding: 6px 0;
+    animation: dropdown 0.15s ease;
+}
+
+.customSelectOption {
+    padding: 10px 14px;
+    cursor: pointer;
+    transition: background 0.2s;
+    font-size: 0.95rem;
+    user-select: none;
+}
+
+.customSelectOption:hover {
+    background: rgba(250, 129, 18, 0.12);
+}
+
+.customSelectOptionSelected {
+    background: rgba(250, 129, 18, 0.16);
+}
+
+@keyframes dropdown {
+    from { opacity: 0; transform: translateY(-4px); }
+    to { opacity: 1; transform: translateY(0); }
 }
 
 .input:focus,
@@ -281,6 +377,254 @@
     color: red;
     font-size: 0.85rem;
     margin-top: 4px;
+}
+
+.formLayout {
+    display: flex;
+    flex-direction: column;
+    gap: 18px;
+}
+
+.formSection {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+}
+
+.summarySection {
+    width: 100%;
+}
+
+.section {
+    background: var(--color-white);
+    border: 1px solid var(--color-gray-100);
+    border-radius: 14px;
+    padding: 18px;
+    box-shadow: 0 8px 18px rgba(0, 0, 0, 0.05);
+}
+
+.sectionHeader {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 12px;
+}
+
+.sectionTitle {
+    font-size: 1.18rem;
+    font-weight: 700;
+    margin: 0;
+}
+
+.packageFeatures {
+    list-style: none;
+    padding: 0;
+    margin: 12px 0 0 0;
+}
+
+.featureItem {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 10px;
+    color: #444;
+    font-size: 0.95rem;
+}
+
+.featureIcon {
+    color: var(--color-gold);
+    font-size: 1.1rem;
+}
+
+.addonsSection {
+    margin-top: 18px;
+}
+
+.addonsTitle {
+    font-size: 0.95rem;
+    font-weight: 700;
+    margin-bottom: 10px;
+}
+
+.addonsList {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 10px;
+}
+
+.addonItem {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 12px 14px;
+    border: 1px solid var(--color-gray-100);
+    border-radius: 12px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.addonItem:hover {
+    border-color: var(--color-gold);
+    box-shadow: 0 8px 18px rgba(250, 129, 18, 0.15);
+}
+
+.addonSelected {
+    border-color: var(--color-gold);
+    background: rgba(250, 129, 18, 0.06);
+}
+
+.addonCheckbox {
+    accent-color: var(--color-gold);
+    width: 18px;
+    height: 18px;
+}
+
+.addonLabel {
+    flex: 1;
+    margin-left: 10px;
+    font-weight: 600;
+}
+
+.addonPrice {
+    font-weight: 700;
+    color: var(--color-gold-dark);
+}
+
+.row2 {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 12px;
+}
+
+@media (max-width: 768px) {
+    .row2 {
+        grid-template-columns: 1fr;
+    }
+}
+
+.termsCard {
+    background: rgba(250, 168, 42, 0.1);
+    border: 1px solid rgba(250, 168, 42, 0.4);
+    border-radius: 14px;
+    padding: 18px;
+}
+
+.termsList {
+    list-style: disc;
+    padding-left: 18px;
+    margin: 0 0 14px 0;
+    color: #444;
+    font-size: 1rem;
+    line-height: 1.5;
+}
+
+.termsCheckboxLabel {
+    display: flex;
+    gap: 10px;
+    align-items: flex-start;
+    font-size: 1rem;
+    cursor: pointer;
+}
+
+.termsCheckbox {
+    margin-top: 3px;
+    accent-color: var(--color-gold);
+}
+
+.summaryCard {
+    background: var(--color-white);
+    border: 1px solid rgba(250, 129, 18, 0.25);
+    border-radius: 14px;
+    padding: 18px;
+    box-shadow: 0 10px 22px rgba(0, 0, 0, 0.06);
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+}
+
+.summaryTitle {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    font-size: 1.1rem;
+    font-weight: 700;
+    margin: 0;
+}
+
+.summaryTitle::after {
+    content: '';
+    flex: 1;
+    height: 1px;
+    background: rgba(0, 0, 0, 0.08);
+    margin-left: 12px;
+}
+
+.paymentAction {
+    width: 100%;
+    padding: 14px;
+    background: linear-gradient(135deg, var(--color-gold), var(--color-gold-dark));
+    border: none;
+    color: var(--color-white);
+    font-weight: 700;
+    border-radius: 10px;
+    cursor: pointer;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.paymentAction:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+}
+
+.paymentAction:hover:not(:disabled) {
+    transform: translateY(-1px);
+    box-shadow: 0 14px 30px rgba(250, 129, 18, 0.3);
+}
+
+.summaryTitle {
+    font-size: 1.1rem;
+    font-weight: 700;
+    margin: 0;
+}
+
+.summaryRow {
+    display: flex;
+    justify-content: space-between;
+    font-size: 0.95rem;
+    color: #444;
+}
+
+.summaryTotal {
+    border-top: 1px solid var(--color-gray-100);
+    padding-top: 14px;
+    display: flex;
+    justify-content: space-between;
+    font-weight: 700;
+    font-size: 1.1rem;
+}
+
+.totalAmount {
+    color: var(--color-gold);
+}
+
+.summaryNote {
+    font-size: 0.85rem;
+    color: #666;
+    margin-top: 6px;
+}
+
+.summaryLabel {
+    font-weight: 600;
+}
+
+.summaryValue {
+    font-weight: 700;
+}
+
+.summarySubtext {
+    margin-top: 4px;
+    color: #777;
 }
 
 @keyframes fadeIn {

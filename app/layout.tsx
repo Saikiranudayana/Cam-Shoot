@@ -4,6 +4,7 @@ import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import { BookingProvider } from "@/context/BookingContext";
 import BookingModal from "@/components/BookingModal";
+import BookTab from "@/components/BookTab";
 import "./globals.css";
 
 const inter = Inter({
@@ -51,6 +52,7 @@ export default function RootLayout({
           <Header />
           <BookingModal />
           {children}
+          <BookTab />
           <Footer />
         </BookingProvider>
       </body>

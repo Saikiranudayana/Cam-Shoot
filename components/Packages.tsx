@@ -47,9 +47,8 @@ const PACKAGES = [
         isPopular: false,
         buttonColor: 'black',
         features: [
-            { text: '1 Reel (45 sec – 1 min)', icon: <VideoIcon /> },
             { text: '4K Quality', icon: <StarIcon /> },
-            { text: 'Up to 1.5 Hr Shoot', icon: <ClockIcon /> },
+            { text: 'Up to 2 Hr Shoot', icon: <ClockIcon /> },
             { text: 'Edited within 1.5 Hr', icon: <EditIcon /> },
             { text: 'No RAW Data', icon: <CameraIcon /> },
         ]
@@ -61,11 +60,10 @@ const PACKAGES = [
         isPopular: true,
         buttonColor: 'orange',
         features: [
-            { text: '2 Reels (45 sec – 1 min)', icon: <VideoIcon /> },
             { text: '4K Quality', icon: <StarIcon /> },
-            { text: 'Up to 2.5 Hr Shoot', icon: <ClockIcon /> },
+            { text: 'Up to 3.5 Hr Shoot', icon: <ClockIcon /> },
             { text: 'Quick Same-Day Delivery', icon: <EditIcon /> },
-            { text: 'No RAW Data', icon: <CameraIcon /> },
+            { text: 'Raw data included', icon: <CameraIcon /> },
         ]
     },
     {
@@ -75,11 +73,10 @@ const PACKAGES = [
         isPopular: true,
         buttonColor: 'orange',
         features: [
-            { text: '3 Reels (45 sec – 1 min)', icon: <VideoIcon /> },
             { text: '4K Quality', icon: <StarIcon /> },
-            { text: 'Up to 3.5 Hr Shoot', icon: <ClockIcon /> },
+            { text: 'Up to 5 Hr Shoot', icon: <ClockIcon /> },
             { text: 'Fast Same-Day Delivery', icon: <EditIcon /> },
-            { text: 'No RAW Data', icon: <CameraIcon /> },
+            { text: 'Raw data included', icon: <CameraIcon /> },
         ]
     }
 ];
