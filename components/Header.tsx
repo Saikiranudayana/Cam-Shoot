@@ -31,8 +31,7 @@ const Header = () => {
                 <nav className={styles.navLinks}>
                     <button onClick={() => scrollToSection('home')} className={styles.navLink} style={{ background: 'none', border: 'none', cursor: 'pointer', fontFamily: 'inherit', fontSize: 'inherit', fontWeight: 'inherit' }}>Home</button>
                     <button onClick={() => scrollToSection('about')} className={styles.navLink} style={{ background: 'none', border: 'none', cursor: 'pointer', fontFamily: 'inherit', fontSize: 'inherit', fontWeight: 'inherit' }}>About</button>
-                    <button onClick={() => scrollToSection('services')} className={styles.navLink} style={{ background: 'none', border: 'none', cursor: 'pointer', fontFamily: 'inherit', fontSize: 'inherit', fontWeight: 'inherit' }}>Services</button>
-                    <button onClick={() => scrollToSection('portfolio')} className={styles.navLink} style={{ background: 'none', border: 'none', cursor: 'pointer', fontFamily: 'inherit', fontSize: 'inherit', fontWeight: 'inherit' }}>Portfolio</button>
+                    <button onClick={() => scrollToSection('services')} className={styles.navLink} style={{ background: 'none', border: 'none', cursor: 'pointer', fontFamily: 'inherit', fontSize: 'inherit', fontWeight: 'inherit' }}>Our Services</button>
                     <button onClick={() => scrollToSection('contact')} className={styles.navLink} style={{ background: 'none', border: 'none', cursor: 'pointer', fontFamily: 'inherit', fontSize: 'inherit', fontWeight: 'inherit' }}>
                         Contact
                     </button>

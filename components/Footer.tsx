@@ -46,7 +46,6 @@ const Footer = () => {
                             <li><button onClick={() => scrollToSection('home')} style={{ background: 'none', border: 'none', padding: 0, color: 'inherit', cursor: 'pointer', font: 'inherit' }}>Home</button></li>
                             <li><button onClick={() => scrollToSection('about')} style={{ background: 'none', border: 'none', padding: 0, color: 'inherit', cursor: 'pointer', font: 'inherit' }}>About Us</button></li>
                             <li><button onClick={() => scrollToSection('services')} style={{ background: 'none', border: 'none', padding: 0, color: 'inherit', cursor: 'pointer', font: 'inherit' }}>Services</button></li>
-                            <li><button onClick={() => scrollToSection('portfolio')} style={{ background: 'none', border: 'none', padding: 0, color: 'inherit', cursor: 'pointer', font: 'inherit' }}>Portfolio</button></li>
                             <li><button onClick={() => scrollToSection('contact')} style={{ background: 'none', border: 'none', padding: 0, color: 'inherit', cursor: 'pointer', font: 'inherit' }}>Booking</button></li>
                         </ul>
                     </div>

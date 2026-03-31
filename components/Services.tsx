@@ -44,26 +44,31 @@ const services = [
     {
         title: "Event Shoots",
         description: "Capture the energy and emotion of your special events with our dynamic coverage.",
+        image: "/assets/corparte events people.webp",
         icon: <EventIcon />
     },
     {
         title: "Wedding Shoots",
         description: "Timeless cinematic storytelling for your big day. Relive every moment.",
+        image: "/assets/Wedding.jpg",
         icon: <WeddingIcon />
     },
     {
         title: "Corporate Shoots",
         description: "Professional coverage for conferences, brand launches, and corporate films.",
+        image: "/assets/Corporate events.jpg",
         icon: <CorporateIcon />
     },
     {
         title: "Personal Branding",
         description: "Elevate your personal brand with high-quality photo and video content.",
+        image: "/assets/Personal Branding.jpg",
         icon: <PersonalIcon />
     },
     {
         title: "Social Media Content",
-        description: "Engaging short-form content designed to go viral on Instagram and TikTok.",
+        description: "Content creation tailored for social media, designed to perform on Instagram and TikTok.",
+        image: "/assets/social media.jpg",
         icon: <SocialIcon />
     }
 ];
@@ -79,7 +84,14 @@ const Services = () => {
                 <div className={styles.grid}>
                     {services.map((service, index) => (
                         <div key={index} className={styles.card}>
-                            <div className={styles.icon}>{service.icon}</div>
+                            {service.image ? (
+                                <div className={styles.imageWrap}>
+                                    {/* eslint-disable-next-line @next/next/no-img-element */}
+                                    <img src={service.image} alt={service.title} className={styles.image} />
+                                </div>
+                            ) : (
+                                <div className={styles.icon}>{service.icon}</div>
+                            )}
                             <h3 className={styles.cardTitle}>{service.title}</h3>
                             <p className={styles.cardDesc}>{service.description}</p>
                         </div>

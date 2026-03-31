@@ -21,7 +21,7 @@ const Addons = () => {
                             </div>
                             <div className={styles.row}>
                                 <span className={styles.itemName}>Extra Video</span>
-                                <span className={styles.price}>₹2,999/-</span>
+                                <span className={styles.price}>₹1,499/-</span>
                             </div>
                         </div>
                     </div>

@@ -1,7 +1,6 @@
 import Hero from "@/components/Hero";
 import About from "@/components/About";
 import Services from "@/components/Services";
-import Portfolio from "@/components/Portfolio";
 import Packages from "@/components/Packages";
 import Addons from "@/components/Addons"; // Import Addons
 import WhyChooseUs from "@/components/WhyChooseUs";
@@ -17,14 +16,11 @@ export default function Home() {
         <Packages />
         <Addons /> {/* Added Addons here as requested "right below the package" */}
       </section>
-      <section id="about">
-        <About />
-      </section>
       <section id="services">
         <Services />
       </section>
-      <section id="portfolio">
-        <Portfolio />
+      <section id="about">
+        <About />
       </section>
       <section id="why-choose-us">
         <WhyChooseUs />

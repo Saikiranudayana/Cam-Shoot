@@ -7,6 +7,7 @@ Updated the entire CamShoot website branding with the new logo featuring a black
 
 ---
 
+
 ## New Logo Assets Created
 
 ### 1. Primary Logo (Black Background)

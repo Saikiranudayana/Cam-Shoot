@@ -114,7 +114,7 @@ const ADDONS: Addon[] = [
     {
         id: 'extra_video',
         name: 'Extra Video',
-        getPrice: () => 2999
+        getPrice: () => 1499
     }
 ];
 
