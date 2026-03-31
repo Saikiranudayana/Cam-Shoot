@@ -20,6 +20,24 @@
     z-index: 1;
 }
 
+.heroVisual {
+    position: absolute;
+    right: 8%;
+    top: 50%;
+    transform: translateY(-50%);
+    z-index: 1;
+    pointer-events: none;
+}
+
+.heroVisualImage {
+    width: clamp(220px, 24vw, 420px);
+    height: auto;
+    border-radius: 18px;
+    transform: rotate(-30deg);
+    box-shadow: 0 24px 48px rgba(0, 0, 0, 0.45);
+    opacity: 0.95;
+}
+
 .content {
     position: relative;
     z-index: 2;
@@ -79,6 +97,16 @@
     }
 }
 
+@media (max-width: 1100px) {
+    .heroVisual {
+        right: 4%;
+    }
+
+    .heroVisualImage {
+        width: clamp(180px, 20vw, 280px);
+    }
+}
+
 @media (max-width: 768px) {
     .title {
         font-size: 2.5rem;
@@ -87,5 +115,9 @@
     .buttons {
         flex-direction: column;
         gap: 16px;
+    }
+
+    .heroVisual {
+        display: none;
     }
 }

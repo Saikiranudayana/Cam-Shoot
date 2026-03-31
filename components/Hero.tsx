@@ -2,7 +2,6 @@
 import Link from 'next/link';
 import { useBooking } from '@/context/BookingContext';
 import styles from './Hero.module.css';
-// Fixed TypeScript error with onClick handler
 
 const Hero = () => {
     const { openBooking } = useBooking();
@@ -23,7 +22,10 @@ const Hero = () => {
 
     return (
         <section className={styles.hero}>
-
+            <div className={styles.heroVisual}>
+                {/* eslint-disable-next-line @next/next/no-img-element */}
+                <img src="/assets/Flash sale.jpg" alt="CamShoot featured visual" className={styles.heroVisualImage} />
+            </div>
 
             <div className={styles.content}>
                 <h1 className={styles.title}>

@@ -14,12 +14,9 @@ const QualityIcon = () => (
 );
 
 const FastDeliveryIcon = () => (
-    <svg viewBox="0 0 64 64" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-        <text x="32" y="28" textAnchor="middle" fill="currentColor" fontFamily="Arial, sans-serif" fontWeight="bold" fontStyle="italic" fontSize="18" stroke="none">FAST</text>
-        <text x="32" y="44" textAnchor="middle" fill="currentColor" fontFamily="Arial, sans-serif" fontSize="10" letterSpacing="1" stroke="none">DELIVERY</text>
-        {/* Swoosh lines */}
-        <path d="M10 32 Q 32 20 54 32" strokeWidth="2" />
-        <path d="M6 36 Q 32 22 58 36" strokeWidth="1.5" opacity="0.6" />
+    <svg viewBox="0 0 64 64" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+        {/* Flash/Lightning Bolt */}
+        <path d="M32 10 L50 32 L35 32 L40 54 L14 32 L28 32 Z" fill="currentColor" />
     </svg>
 );
 

@@ -99,17 +99,12 @@ const ADDONS: Addon[] = [
         name: 'Drone Shoot',
         getPrice: (pkgId) => {
             switch (pkgId) {
-                case 'pro': return 1999;
-                case 'pro_plus': return 2499;
-                case 'pro_max': return 2999;
-                default: return 1999;
+                case 'pro': return 99999;
+                case 'pro_plus': return 3499;
+                case 'pro_max': return 3999;
+                default: return 99999;
             }
         }
-    },
-    {
-        id: 'extra_hour',
-        name: 'Extra Hour',
-        getPrice: () => 1999
     },
     {
         id: 'extra_video',
@@ -117,6 +112,9 @@ const ADDONS: Addon[] = [
         getPrice: () => 1499
     }
 ];
+
+const COUPON_CODE = 'CAM30FLASH';
+const COUPON_DISCOUNT_RATE = 0.3;
 
 // --- Component ---
 
@@ -146,6 +144,7 @@ const BookingModal = () => {
     });
 
     const [agreedToTerms, setAgreedToTerms] = useState(false);
+    const [couponInput, setCouponInput] = useState('');
 
     const resetForm = () => {
         setSelectedPackage('pro');
@@ -153,6 +152,7 @@ const BookingModal = () => {
         setUserDetails({ firstName: '', lastName: '', email: '', phone: '' });
         setEventDetails({ date: '', time: '', type: 'Wedding', customType: '', location: '', city: '', specialReq: '' });
         setAgreedToTerms(false);
+        setCouponInput('');
         setPackageDropdownOpen(false);
     };
 
@@ -189,8 +189,11 @@ const BookingModal = () => {
     };
 
     const addonsTotal = selectedAddons.reduce((sum, id) => sum + calculateAddonPrice(id), 0);
-    const totalAmount = currentPackage.price + addonsTotal;
-    const advanceAmount = totalAmount * 0.5;
+    const subtotalAmount = currentPackage.price + addonsTotal;
+    const isCouponApplied = couponInput.trim().toUpperCase() === COUPON_CODE;
+    const discountAmount = isCouponApplied ? Math.round(subtotalAmount * COUPON_DISCOUNT_RATE) : 0;
+    const totalAmount = subtotalAmount - discountAmount;
+    const advanceAmount = Math.round(totalAmount * 0.5);
     const remainingAmount = totalAmount - advanceAmount;
 
     const validateBooking = () => {
@@ -278,6 +281,8 @@ const BookingModal = () => {
                                     packageName: currentPackage.name,
                                     packagePrice: currentPackage.price,
                                     addons: selectedAddons,
+                                    couponCode: isCouponApplied ? COUPON_CODE : '',
+                                    discountAmount,
                                     totalAmount,
                                     advancePaid: advanceAmount,
                                     userDetails,
@@ -295,6 +300,8 @@ const BookingModal = () => {
                             successUrl.searchParams.set('phone', userDetails.phone);
                             successUrl.searchParams.set('packageName', currentPackage.name);
                             successUrl.searchParams.set('addons', selectedAddons.join(','));
+                            successUrl.searchParams.set('couponCode', isCouponApplied ? COUPON_CODE : '');
+                            successUrl.searchParams.set('discountAmount', discountAmount.toString());
                             successUrl.searchParams.set('totalAmount', totalAmount.toString());
                             successUrl.searchParams.set('advancePaid', advanceAmount.toString());
                             successUrl.searchParams.set('eventDate', eventDetails.date);
@@ -410,6 +417,7 @@ const BookingModal = () => {
                                     <h4 className={styles.addonsTitle}>Add-ons (Optional)</h4>
                                     <div className={styles.addonsList}>
                                         {ADDONS.map(addon => {
+                                            if (selectedPackage === 'pro' && addon.id === 'drone') return null;
                                             const price = addon.getPrice(selectedPackage);
                                             const isSelected = selectedAddons.includes(addon.id);
                                             return (
@@ -593,6 +601,21 @@ const BookingModal = () => {
                         <div className={styles.summarySection}>
                             <div className={styles.summaryCard}>
                                 <h3 className={styles.summaryTitle}>Payment Summary</h3>
+                                <div className={styles.couponBox}>
+                                    <label className={styles.label}>Coupon Code</label>
+                                    <input
+                                        type="text"
+                                        className={styles.input}
+                                        placeholder="Enter coupon code"
+                                        value={couponInput}
+                                        onChange={e => setCouponInput(e.target.value)}
+                                    />
+                                    {couponInput.trim() !== '' && (
+                                        <p className={isCouponApplied ? styles.couponSuccess : styles.couponError}>
+                                            {isCouponApplied ? 'Coupon applied: 30% discount' : 'Invalid coupon code'}
+                                        </p>
+                                    )}
+                                </div>
                                 <div className={styles.summaryRow}>
                                     <span>{currentPackage.name} Package</span>
                                     <span>₹{currentPackage.price.toLocaleString('en-IN')}</span>
@@ -607,6 +630,16 @@ const BookingModal = () => {
                                         </div>
                                     );
                                 })}
+                                <div className={styles.summaryTotal}>
+                                    <span>Subtotal</span>
+                                    <span>₹{subtotalAmount.toLocaleString('en-IN')}</span>
+                                </div>
+                                {isCouponApplied && (
+                                    <div className={styles.summaryRow}>
+                                        <span style={{ color: '#2e7d32', fontWeight: 600 }}>Coupon ({COUPON_CODE})</span>
+                                        <span style={{ color: '#2e7d32', fontWeight: 700 }}>-₹{discountAmount.toLocaleString('en-IN')}</span>
+                                    </div>
+                                )}
                                 <div className={styles.summaryTotal}>
                                     <span>Total Amount</span>
                                     <span className={styles.totalAmount}>₹{totalAmount.toLocaleString('en-IN')}</span>

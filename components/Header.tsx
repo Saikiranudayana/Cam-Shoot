@@ -25,7 +25,7 @@ const Header = () => {
             <div className={styles.navContainer}>
                 <Link href="/" className={styles.logo} onClick={() => scrollToSection('home')}>
                     {/* eslint-disable-next-line @next/next/no-img-element */}
-                    <img src="/assets/logo.png" alt="CamShoot" style={{ height: '60px', borderRadius: '8px' }} />
+                    <img src="/assets/Camshhot original.jpeg" alt="CamShoot" style={{ height: '60px', borderRadius: '8px' }} />
                 </Link>
 
                 <nav className={styles.navLinks}>

@@ -25,6 +25,12 @@ const EditIcon = () => (
     </svg>
 );
 
+const FlashIcon = () => (
+    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+        <path d="M13 2L3 14h8l-1 8 10-12h-8l1-8z" />
+    </svg>
+);
+
 const CameraIcon = () => (
     <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
         <path d="M23 19a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4l2-3h6l2 3h4a2 2 0 0 1 2 2z" />
@@ -44,6 +50,7 @@ const PACKAGES = [
         id: 'pro',
         name: 'PRO',
         price: 4999,
+        dronePrice: null,
         isPopular: false,
         buttonColor: 'black',
         features: [
@@ -57,12 +64,13 @@ const PACKAGES = [
         id: 'pro_plus',
         name: 'PRO+',
         price: 8999,
+        dronePrice: 3499,
         isPopular: true,
         buttonColor: 'orange',
         features: [
             { text: '4K Quality', icon: <StarIcon /> },
             { text: 'Up to 3.5 Hr Shoot', icon: <ClockIcon /> },
-            { text: 'Quick Same-Day Delivery', icon: <EditIcon /> },
+            { text: 'Quick Same-Day Delivery', icon: <FlashIcon /> },
             { text: 'Raw data included', icon: <CameraIcon /> },
         ]
     },
@@ -70,12 +78,13 @@ const PACKAGES = [
         id: 'pro_max',
         name: 'PRO MAX',
         price: 13999,
+        dronePrice: 3999,
         isPopular: true,
         buttonColor: 'orange',
         features: [
             { text: '4K Quality', icon: <StarIcon /> },
             { text: 'Up to 5 Hr Shoot', icon: <ClockIcon /> },
-            { text: 'Fast Same-Day Delivery', icon: <EditIcon /> },
+            { text: 'Fast Same-Day Delivery', icon: <FlashIcon /> },
             { text: 'Raw data included', icon: <CameraIcon /> },
         ]
     }
@@ -122,6 +131,13 @@ const Packages = () => {
                                     ))}
                                 </ul>
                             </div>
+
+                            {/* Drone Add-on Info */}
+                            {pkg.dronePrice && (
+                                <div className={styles.droneInfo}>
+                                    Drone (₹{pkg.dronePrice.toLocaleString('en-IN')})
+                                </div>
+                            )}
 
                             {/* Price */}
                             <div className={styles.priceContainer}>

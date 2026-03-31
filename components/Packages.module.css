@@ -140,6 +140,16 @@
     text-align: center;
 }
 
+.droneInfo {
+    text-align: center;
+    font-size: 0.95rem;
+    color: var(--color-gold);
+    font-weight: 600;
+    margin-bottom: 15px;
+    padding-bottom: 15px;
+    border-bottom: 1px solid rgba(250, 129, 18, 0.2);
+}
+
 .priceContainer {
     text-align: center;
     margin-bottom: 25px;

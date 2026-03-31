@@ -9,16 +9,39 @@ const BookingForm = () => {
         <section className={styles.booking} id="contact">
             <div className="container">
                 <div className={styles.twoCol}>
-                    <div className={styles.info}>
-                        <h2 className={styles.infoTitle}>
-                            Let's Create <span className="text-gold">Magic</span>
-                        </h2>
-                        <p className={styles.infoText}>
-                            Ready to capture your special moments? Click the button below to start your booking process. We can't wait to work with you!
-                        </p>
+                    {/* LEFT SIDE - FOUNDER PHOTO */}
+                    <div className={styles.founderSection}>
+                        <div className={styles.founderPhotoContainer}>
+                            {/* eslint-disable-next-line @next/next/no-img-element */}
+                            <img
+                                src="/assets/Camshoot Founder.jpg"
+                                alt="Founder"
+                                className={styles.founderPhoto}
+                            />
+                        </div>
+                        <div className={styles.founderInfo}>
+                            {/* eslint-disable-next-line @next/next/no-img-element */}
+                            <img src="/assets/Camshhot original.jpeg" alt="CamShoot logo" className={styles.founderLogo} />
+                            <p className={styles.founderTitle}>FOUNDER & CEO</p>
+                            <p className={styles.founderValue}>Mahesh</p>
+                        </div>
+                    </div>
 
-                        <div className={styles.contactDetails}>
-                            <h3 style={{ fontFamily: 'var(--font-heading)', fontSize: '1.25rem', fontWeight: 700, marginBottom: '20px', color: '#333' }}>Contact Information</h3>
+                    {/* RIGHT SIDE - CONTACT & INFO */}
+                    <div className={styles.rightSection}>
+                        {/* HEADING SECTION */}
+                        <div className={styles.headingSection}>
+                            <h2 className={styles.sectionHeading}>
+                                Let's Create <span className="text-gold">Magic</span>
+                            </h2>
+                            <p className={styles.sectionDescription}>
+                                Ready to capture your special moments? Click the button below to start your booking process. We can't wait to work with you!
+                            </p>
+                        </div>
+
+                        {/* CONTACT INFORMATION */}
+                        <div className={styles.infoCard}>
+                            <h3 className={styles.cardTitle}>Contact Information</h3>
 
                             <div className={styles.contactItem}>
                                 <div className={styles.iconCircle}>
@@ -59,8 +82,9 @@ const BookingForm = () => {
                             </div>
                         </div>
 
-                        <div className={styles.followUs}>
-                            <h3 className={styles.followUsTitle}>Follow Us</h3>
+                        {/* FOLLOW US */}
+                        <div className={styles.infoCard}>
+                            <h3 className={styles.cardTitle}>Follow Us</h3>
                             <div className={styles.socialIcons}>
                                 <a href="https://www.instagram.com/cam__shoot" target="_blank" rel="noopener noreferrer" className={styles.socialIconLink} aria-label="Instagram">
                                     <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
@@ -69,21 +93,43 @@ const BookingForm = () => {
                                         <line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line>
                                     </svg>
                                 </a>
+                                <a href="https://www.facebook.com/people/CAM-SHOOT/61588472138922/?rdid=O1U0Nhd9Y6IbDRp7&share_url=https%3A%2F%2Fwww.facebook.com%2Fshare%2F1G46UPCKa1%2F%3Futm_source%3Dig%26utm_medium%3Dsocial%26utm_content%3Dlink_in_bio" target="_blank" rel="noopener noreferrer" className={styles.socialIconLink} aria-label="Facebook">
+                                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                                        <path d="M18 2h-3a6 6 0 0 0-6 6v3H7v4h2v8h4v-8h3l1-4h-4V8a2 2 0 0 1 2-2h3z"></path>
+                                    </svg>
+                                </a>
+                                <a href="https://www.youtube.com/@CAMSHOOT-o6x" target="_blank" rel="noopener noreferrer" className={styles.socialIconLink} aria-label="YouTube">
+                                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                                        <path d="M22.54 6.42a2.78 2.78 0 0 0-1.94-2C18.88 4 12 4 12 4s-6.88 0-8.6.46a2.78 2.78 0 0 0-1.94 2A29 29 0 0 0 1 11.75a29 29 0 0 0 .46 5.33A2.78 2.78 0 0 0 3.4 19c1.72.46 8.6.46 8.6.46s6.88 0 8.6-.46a2.78 2.78 0 0 0 1.94-2 29 29 0 0 0 .46-5.25 29 29 0 0 0-.46-5.33z"></path>
+                                        <polyline points="9.75 15.02 15.5 11.75 9.75 8.48 9.75 15.02"></polyline>
+                                    </svg>
+                                </a>
+                            </div>
+                        </div>
+
+                        {/* LEADERSHIP TEAM */}
+                        <div className={styles.infoCard}>
+                            <h3 className={styles.cardTitle}>Leadership Team</h3>
+                            <div className={styles.leadershipContainer}>
+                                <div className={styles.leadershipPhotoWrapper}>
+                                    {/* eslint-disable-next-line @next/next/no-img-element */}
+                                    <img
+                                        src="/assets/Camshoot Founder.jpg"
+                                        alt="Leader"
+                                        className={styles.leadershipPhoto}
+                                    />
+                                </div>
+                                <div className={styles.leadershipInfo}>
+                                    <h4 className={styles.leadershipName}></h4>
+                                    <p className={styles.leadershipTitle}></p>
+                                </div>
                             </div>
                         </div>
 
                         <div style={{ marginTop: '30px' }}>
-                            <button onClick={() => openBooking()} className="btn btn-gold">
+                            <button onClick={() => openBooking()} className="btn btn-gold" style={{width: '100%'}}>
                                 Start Booking
                             </button>
-                        </div>
-                    </div>
-
-                    <div className={styles.formContainer} style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', minHeight: '300px', backgroundImage: 'url(/assets/Camshoot.jpeg)', backgroundSize: 'cover', backgroundPosition: 'center', borderRadius: '16px' }}>
-                        {/* You could put an image or a simple card here */}
-                        <div style={{ padding: '20px', backgroundColor: 'rgba(0,0,0,0.6)', color: 'white', borderRadius: '8px', textAlign: 'center' }}>
-                            <h3>Professional Shoots</h3>
-                            <p>Weddings • Events • Portraits</p>
                         </div>
                     </div>
                 </div>

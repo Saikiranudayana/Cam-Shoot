@@ -13,11 +13,7 @@ const Addons = () => {
                         <div className={styles.cardBody}>
                             <div className={styles.row}>
                                 <span className={styles.itemName}>Drone Shoot</span>
-                                <span className={styles.price}>₹1,999/-</span>
-                            </div>
-                            <div className={styles.row}>
-                                <span className={styles.itemName}>Extra Hour</span>
-                                <span className={styles.price}>₹1,999/- Per Hour</span>
+                                <span className={styles.price}>₹3,499 - ₹3,999/-</span>
                             </div>
                             <div className={styles.row}>
                                 <span className={styles.itemName}>Extra Video</span>

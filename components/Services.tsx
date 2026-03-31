@@ -44,7 +44,7 @@ const services = [
     {
         title: "Event Shoots",
         description: "Capture the energy and emotion of your special events with our dynamic coverage.",
-        image: "/assets/corparte events people.webp",
+        image: "/assets/holi events.jpg",
         icon: <EventIcon />
     },
     {

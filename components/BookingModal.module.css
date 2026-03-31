@@ -627,6 +627,27 @@
     color: #777;
 }
 
+.couponBox {
+    border: 1px dashed rgba(250, 129, 18, 0.4);
+    border-radius: 10px;
+    padding: 12px;
+    background: rgba(250, 129, 18, 0.05);
+}
+
+.couponSuccess {
+    margin-top: 8px;
+    font-size: 0.85rem;
+    color: #2e7d32;
+    font-weight: 600;
+}
+
+.couponError {
+    margin-top: 8px;
+    font-size: 0.85rem;
+    color: #b3261e;
+    font-weight: 600;
+}
+
 @keyframes fadeIn {
     from {
         opacity: 0;
