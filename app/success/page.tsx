@@ -102,12 +102,13 @@ function SuccessContent() {
         try {
             const { jsPDF } = await import('jspdf');
 
-            let autoTable: ((doc: unknown, options: unknown) => void) | undefined;
+            // eslint-disable-next-line @typescript-eslint/no-explicit-any
+            let autoTable: ((doc: any, options: any) => void) | undefined;
             try {
                 const autoTableModule = await import('jspdf-autotable');
                 autoTable =
-                    autoTableModule.default ||
-                    (autoTableModule as unknown as { autoTable?: (doc: unknown, options: unknown) => void }).autoTable;
+                    (autoTableModule.default as any) ||
+                    (autoTableModule as any).autoTable;
             } catch (pluginError) {
                 console.warn('jspdf-autotable failed to load. Continuing with basic PDF layout.', pluginError);
             }
