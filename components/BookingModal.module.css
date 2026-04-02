@@ -356,6 +356,27 @@
     border-color: var(--color-gold);
 }
 
+.errorLabel {
+    color: #b3261e;
+}
+
+.errorInput {
+    border-color: #b3261e !important;
+    background: #fff5f5;
+}
+
+.errorInput:focus {
+    border-color: #b3261e !important;
+    box-shadow: 0 0 0 3px rgba(179, 38, 30, 0.18) !important;
+}
+
+.fieldErrorText {
+    margin-top: 6px;
+    color: #b3261e;
+    font-size: 0.82rem;
+    font-weight: 600;
+}
+
 .summaryItem {
     display: flex;
     justify-content: space-between;

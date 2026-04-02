@@ -20,15 +20,27 @@ interface OrderDetails {
 export default function SuccessPage() {
     return (
         <Suspense fallback={
-            <div className={styles.container}>
-                <div className={styles.loading}>
-                    <div className={styles.spinner}></div>
-                    <p>Loading...</p>
-                </div>
-            </div>
+            <LoadingState message="Loading your confirmation..." />
         }>
             <SuccessContent />
         </Suspense>
+    );
+}
+
+function LoadingState({ message }: { message: string }) {
+    return (
+        <div className={styles.container}>
+            <div className={styles.loadingCard}>
+                <div className={styles.flashWrapper}>
+                    <svg className={styles.flashIcon} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+                        <path d="M13 2 3 14h7l-1 8 10-12h-7l1-8z" />
+                    </svg>
+                </div>
+                <div className={styles.loadingRing}></div>
+                <h2 className={styles.loadingTitle}>CamShoot is preparing your order</h2>
+                <p className={styles.loadingText}>{message}</p>
+            </div>
+        </div>
     );
 }
 
@@ -36,6 +48,7 @@ function SuccessContent() {
     const searchParams = useSearchParams();
     const router = useRouter();
     const [orderDetails, setOrderDetails] = useState<OrderDetails | null>(null);
+    const [isPreparingScreen, setIsPreparingScreen] = useState(true);
     const [isGeneratingPDF, setIsGeneratingPDF] = useState(false);
 
     useEffect(() => {
@@ -68,6 +81,18 @@ function SuccessContent() {
             });
         }
     }, [searchParams]);
+
+    useEffect(() => {
+        if (!orderDetails) {
+            return;
+        }
+
+        const timer = setTimeout(() => {
+            setIsPreparingScreen(false);
+        }, 1600);
+
+        return () => clearTimeout(timer);
+    }, [orderDetails]);
 
     const generatePDF = async () => {
         if (!orderDetails) return;
@@ -231,14 +256,11 @@ function SuccessContent() {
     };
 
     if (!orderDetails) {
-        return (
-            <div className={styles.container}>
-                <div className={styles.loading}>
-                    <div className={styles.spinner}></div>
-                    <p>Loading order details...</p>
-                </div>
-            </div>
-        );
+        return <LoadingState message="Loading order details..." />;
+    }
+
+    if (isPreparingScreen) {
+        return <LoadingState message="Finalizing your booking and transaction details..." />;
     }
 
     return (

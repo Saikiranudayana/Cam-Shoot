@@ -121,6 +121,8 @@ const COUPON_DISCOUNT_RATE = 0.3;
 const BookingModal = () => {
     const { isBookingOpen, closeBooking, preSelectedPackage } = useBooking();
 
+    type RequiredEventField = 'date' | 'time' | 'location';
+
     const [selectedPackage, setSelectedPackage] = useState<PackageId>('pro');
     const [selectedAddons, setSelectedAddons] = useState<string[]>([]);
 
@@ -142,6 +144,11 @@ const BookingModal = () => {
         city: '',
         specialReq: ''
     });
+    const [eventFieldErrors, setEventFieldErrors] = useState<Record<RequiredEventField, boolean>>({
+        date: false,
+        time: false,
+        location: false,
+    });
 
     const [agreedToTerms, setAgreedToTerms] = useState(false);
     const [couponInput, setCouponInput] = useState('');
@@ -151,6 +158,7 @@ const BookingModal = () => {
         setSelectedAddons([]);
         setUserDetails({ firstName: '', lastName: '', email: '', phone: '' });
         setEventDetails({ date: '', time: '', type: 'Wedding', customType: '', location: '', city: '', specialReq: '' });
+        setEventFieldErrors({ date: false, time: false, location: false });
         setAgreedToTerms(false);
         setCouponInput('');
         setPackageDropdownOpen(false);
@@ -207,10 +215,27 @@ const BookingModal = () => {
             return false;
         }
 
-        if (!eventDetails.date || !eventDetails.time || !eventDetails.location) {
-            alert('Please fill in all event details.');
+        const missingEventFields: RequiredEventField[] = [];
+        if (!eventDetails.date) missingEventFields.push('date');
+        if (!eventDetails.time) missingEventFields.push('time');
+        if (!eventDetails.location) missingEventFields.push('location');
+
+        if (missingEventFields.length > 0) {
+            setEventFieldErrors({
+                date: missingEventFields.includes('date'),
+                time: missingEventFields.includes('time'),
+                location: missingEventFields.includes('location'),
+            });
+
+            if (missingEventFields.length === 1) {
+                alert(`Oops! You forgot to fill the ${missingEventFields[0]} field. Please fill it.`);
+            } else {
+                alert(`Oops! You forgot to fill ${missingEventFields.join(' and ')}. Please fill all required event details.`);
+            }
             return false;
         }
+
+        setEventFieldErrors({ date: false, time: false, location: false });
 
         if (!agreedToTerms) {
             alert('Please agree to the terms and conditions to continue.');
@@ -246,13 +271,20 @@ const BookingModal = () => {
 
             const orderData = await orderResponse.json();
 
-            if (!orderData.success) {
-                alert('Failed to create order. Please try again.');
+            if (!orderResponse.ok || !orderData.success) {
+                const message = orderData?.error || 'Failed to create order. Please try again.';
+                alert(message);
+                return;
+            }
+
+            const razorpayKey = process.env.NEXT_PUBLIC_RAZORPAY_KEY_ID;
+            if (!razorpayKey) {
+                alert('Payment key is missing. Please set NEXT_PUBLIC_RAZORPAY_KEY_ID and restart the app.');
                 return;
             }
 
             const options = {
-                key: process.env.NEXT_PUBLIC_RAZORPAY_KEY_ID,
+                key: razorpayKey,
                 amount: orderData.amount,
                 currency: orderData.currency,
                 name: 'CamShoot',
@@ -496,24 +528,36 @@ const BookingModal = () => {
 
                                 <div className={styles.row2}>
                                     <div className={styles.inputGroup}>
-                                        <label className={styles.label}>Date *</label>
+                                        <label className={`${styles.label} ${eventFieldErrors.date ? styles.errorLabel : ''}`}>Date *</label>
                                         <input
                                             type="date"
-                                            className={styles.input}
+                                            className={`${styles.input} ${eventFieldErrors.date ? styles.errorInput : ''}`}
                                             value={eventDetails.date}
-                                            onChange={e => setEventDetails({ ...eventDetails, date: e.target.value })}
+                                            onChange={e => {
+                                                setEventDetails({ ...eventDetails, date: e.target.value });
+                                                if (e.target.value) {
+                                                    setEventFieldErrors(prev => ({ ...prev, date: false }));
+                                                }
+                                            }}
                                             required
                                         />
+                                        {eventFieldErrors.date && <p className={styles.fieldErrorText}>Please select a date.</p>}
                                     </div>
                                     <div className={styles.inputGroup}>
-                                        <label className={styles.label}>Time *</label>
+                                        <label className={`${styles.label} ${eventFieldErrors.time ? styles.errorLabel : ''}`}>Time *</label>
                                         <input
                                             type="time"
-                                            className={styles.input}
+                                            className={`${styles.input} ${eventFieldErrors.time ? styles.errorInput : ''}`}
                                             value={eventDetails.time}
-                                            onChange={e => setEventDetails({ ...eventDetails, time: e.target.value })}
+                                            onChange={e => {
+                                                setEventDetails({ ...eventDetails, time: e.target.value });
+                                                if (e.target.value) {
+                                                    setEventFieldErrors(prev => ({ ...prev, time: false }));
+                                                }
+                                            }}
                                             required
                                         />
+                                        {eventFieldErrors.time && <p className={styles.fieldErrorText}>Please select a time.</p>}
                                     </div>
                                 </div>
 
@@ -547,14 +591,20 @@ const BookingModal = () => {
                                 )}
 
                                 <div className={styles.inputGroup}>
-                                    <label className={styles.label}>Location (Venue, City) *</label>
+                                    <label className={`${styles.label} ${eventFieldErrors.location ? styles.errorLabel : ''}`}>Location (Venue, City) *</label>
                                     <input
                                         type="text"
-                                        className={styles.input}
+                                        className={`${styles.input} ${eventFieldErrors.location ? styles.errorInput : ''}`}
                                         value={eventDetails.location}
-                                        onChange={e => setEventDetails({ ...eventDetails, location: e.target.value })}
+                                        onChange={e => {
+                                            setEventDetails({ ...eventDetails, location: e.target.value });
+                                            if (e.target.value.trim()) {
+                                                setEventFieldErrors(prev => ({ ...prev, location: false }));
+                                            }
+                                        }}
                                         required
                                     />
+                                    {eventFieldErrors.location && <p className={styles.fieldErrorText}>Please enter event location.</p>}
                                 </div>
 
                                 <div className={styles.inputGroup}>

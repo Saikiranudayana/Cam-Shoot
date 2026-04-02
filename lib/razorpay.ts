@@ -3,20 +3,23 @@ import crypto from 'crypto';
 
 let razorpayInstance: Razorpay | null = null;
 
+const getRazorpayKeyId = (): string | undefined => {
+    return process.env.RAZORPAY_KEY_ID || process.env.NEXT_PUBLIC_RAZORPAY_KEY_ID;
+};
+
 // Initialize Razorpay instance lazily
 const getRazorpayInstance = () => {
     if (!razorpayInstance) {
-        // Check for keys first to provide clear error message
-        if (!process.env.NEXT_PUBLIC_RAZORPAY_KEY_ID || !process.env.RAZORPAY_KEY_SECRET) {
-            // Check if we are in a build environment where we might not want to crash, 
-            // but for runtime we definitely need keys.
-            // However, throwing here is better than crashing blindly.
-            throw new Error("Razorpay keys are missing. Please set NEXT_PUBLIC_RAZORPAY_KEY_ID and RAZORPAY_KEY_SECRET environment variables.");
+        const keyId = getRazorpayKeyId();
+        const keySecret = process.env.RAZORPAY_KEY_SECRET;
+
+        if (!keyId || !keySecret) {
+            throw new Error('Razorpay keys are missing. Set RAZORPAY_KEY_ID (or NEXT_PUBLIC_RAZORPAY_KEY_ID) and RAZORPAY_KEY_SECRET.');
         }
 
         razorpayInstance = new Razorpay({
-            key_id: process.env.NEXT_PUBLIC_RAZORPAY_KEY_ID,
-            key_secret: process.env.RAZORPAY_KEY_SECRET,
+            key_id: keyId,
+            key_secret: keySecret,
         });
     }
     return razorpayInstance;
@@ -59,9 +62,15 @@ export const verifyPaymentSignature = (
 // Create Razorpay order
 export const createRazorpayOrder = async (amount: number, orderId: string) => {
     try {
+        if (!Number.isFinite(amount) || amount <= 0) {
+            throw new Error('Invalid order amount received');
+        }
+
         const instance = getRazorpayInstance();
+        const amountInPaise = Math.round(amount * 100);
+
         const order = await instance.orders.create({
-            amount: amount * 100, // Convert to paise (smallest currency unit)
+            amount: amountInPaise,
             currency: 'INR',
             receipt: orderId,
             notes: {
