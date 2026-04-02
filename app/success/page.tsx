@@ -100,8 +100,14 @@ function SuccessContent() {
         setIsGeneratingPDF(true);
 
         try {
-            const { jsPDF } = await import('jspdf');
-            require('jspdf-autotable');
+            const [{ jsPDF }, autoTableModule] = await Promise.all([
+                import('jspdf'),
+                import('jspdf-autotable'),
+            ]);
+
+            const autoTable =
+                autoTableModule.default ||
+                (autoTableModule as unknown as { autoTable?: (doc: unknown, options: unknown) => void }).autoTable;
 
             const doc = new jsPDF();
 
@@ -186,17 +192,28 @@ function SuccessContent() {
                 });
             }
 
-            (doc as any).autoTable({
-                startY: yPos,
-                head: [['Item', 'Description', 'Amount']],
-                body: tableData,
-                theme: 'striped',
-                headStyles: { fillColor: [212, 175, 55], textColor: [255, 255, 255] },
-                styles: { fontSize: 11 },
-                margin: { left: 20, right: 20 },
-            });
+            if (autoTable) {
+                autoTable(doc, {
+                    startY: yPos,
+                    head: [['Item', 'Description', 'Amount']],
+                    body: tableData,
+                    theme: 'striped',
+                    headStyles: { fillColor: [212, 175, 55], textColor: [255, 255, 255] },
+                    styles: { fontSize: 11 },
+                    margin: { left: 20, right: 20 },
+                });
 
-            yPos = (doc as any).lastAutoTable.finalY + 10;
+                const docWithTable = doc as unknown as { lastAutoTable?: { finalY?: number } };
+                yPos = (docWithTable.lastAutoTable?.finalY || yPos) + 10;
+            } else {
+                doc.setFont('helvetica', 'normal');
+                doc.setFontSize(11);
+                tableData.forEach((row) => {
+                    doc.text(`${row[0]}: ${row[1]} (${row[2]})`, 25, yPos);
+                    yPos += 6;
+                });
+                yPos += 6;
+            }
 
             // Payment summary
             doc.setFillColor(240, 240, 240);
