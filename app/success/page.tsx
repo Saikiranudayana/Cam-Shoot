@@ -100,14 +100,17 @@ function SuccessContent() {
         setIsGeneratingPDF(true);
 
         try {
-            const [{ jsPDF }, autoTableModule] = await Promise.all([
-                import('jspdf'),
-                import('jspdf-autotable'),
-            ]);
+            const { jsPDF } = await import('jspdf');
 
-            const autoTable =
-                autoTableModule.default ||
-                (autoTableModule as unknown as { autoTable?: (doc: unknown, options: unknown) => void }).autoTable;
+            let autoTable: ((doc: unknown, options: unknown) => void) | undefined;
+            try {
+                const autoTableModule = await import('jspdf-autotable');
+                autoTable =
+                    autoTableModule.default ||
+                    (autoTableModule as unknown as { autoTable?: (doc: unknown, options: unknown) => void }).autoTable;
+            } catch (pluginError) {
+                console.warn('jspdf-autotable failed to load. Continuing with basic PDF layout.', pluginError);
+            }
 
             const doc = new jsPDF();
 
