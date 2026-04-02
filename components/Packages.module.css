@@ -1,60 +1,52 @@
 .packages {
-    padding: 80px 20px;
+    padding: 100px 20px;
     background-color: #fcfcfc;
-    /* White/Light background */
 }
 
 .headerContainer {
     text-align: center;
-    margin-bottom: 60px;
+    margin-bottom: 70px;
 }
 
 .title {
     font-family: var(--font-heading);
-    font-size: 3rem;
+    font-size: 3.5rem;
     font-weight: 900;
-    margin-bottom: 15px;
+    margin-bottom: 18px;
     text-transform: uppercase;
     color: var(--color-black);
 }
 
 .subtitle {
-    font-size: 1.1rem;
+    font-size: 1.2rem;
     color: #666;
-    max-width: 600px;
+    max-width: 650px;
     margin: 0 auto;
-    line-height: 1.6;
+    line-height: 1.7;
 }
 
 .grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-    gap: 30px;
+    grid-template-columns: repeat(auto-fit, minmax(340px, 1fr));
+    gap: 35px;
     max-width: 1200px;
     margin: 0 auto;
     align-items: flex-start;
-    /* Align specifically to top so heights match naturally or flex stretch */
 }
 
 .card {
     background: white;
-    border-radius: 12px;
+    border-radius: 14px;
     border: 1px solid #eaeaea;
-    /* Faint border */
-    /* box-shadow: 0 5px 20px rgba(0, 0, 0, 0.05); */
-    /* Minimal shadow or no shadow like image */
     display: flex;
     flex-direction: column;
     position: relative;
-    padding: 30px;
+    padding: 36px;
     transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
-/* Add border color on hover or active state if needed, but image shows clean specific borders. 
-   Actually, the Popular ones in image have an Orange border.
-*/
 .popularCard {
-    border: 1px solid var(--color-gold);
+    border: 2px solid var(--color-gold);
 }
 
 .card:hover {
@@ -64,15 +56,15 @@
 
 .popularBadge {
     position: absolute;
-    top: -15px;
+    top: -16px;
     left: 50%;
     transform: translateX(-50%);
     background-color: var(--color-gold);
     color: white;
-    padding: 5px 20px;
+    padding: 6px 24px;
     border-radius: 20px;
     font-weight: 700;
-    font-size: 0.85rem;
+    font-size: 0.9rem;
     text-transform: uppercase;
     letter-spacing: 0.5px;
     z-index: 2;
@@ -81,15 +73,16 @@
 
 .cardHeader {
     width: 100%;
-    padding: 12px;
-    border-radius: 6px;
+    padding: 16px;
+    border-radius: 8px;
     text-align: center;
     color: white;
     font-family: var(--font-heading);
     font-weight: 800;
-    font-size: 1.5rem;
+    font-size: 1.6rem;
     text-transform: uppercase;
-    margin-bottom: 30px;
+    margin-bottom: 32px;
+    letter-spacing: 1px;
 }
 
 .headerOrange {
@@ -98,21 +91,11 @@
 
 .headerBlack {
     background-color: var(--color-gold);
-    /* User asked for 'exact theme', but image has first one orange too? 
-    Wait, looking at image: Smart Shot header looks Orange actually. 
-    The BUTTON at bottom is black. 
-    Let's make ALL headers Orange to be consistent with 'Theme'. 
-    Wait, looking at image closely: "SMART SHOT" header background is ORANGE. 
-    "XPRESS PRO" header is ORANGE. 
-    "XPRESS PRO+" header is ORANGE. 
-    Okay, all headers are Orange. 
-    Only the bottom button differs. */
-    background-color: var(--color-gold);
 }
 
 .cardBody {
     flex-grow: 1;
-    margin-bottom: 30px;
+    margin-bottom: 32px;
 }
 
 .features {
@@ -122,43 +105,41 @@
 }
 
 .features li {
-    padding: 10px 0;
-    font-size: 1rem;
-    color: #444;
+    padding: 12px 0;
+    font-size: 1.1rem;
+    color: #333;
     display: flex;
     align-items: center;
-    gap: 12px;
+    gap: 14px;
     font-weight: 500;
-    border-bottom: 0px;
-    /* Clean/No border separators in this design */
 }
 
 .icon {
-    font-size: 1.2rem;
+    font-size: 1.3rem;
     color: var(--color-gold);
-    min-width: 24px;
+    min-width: 28px;
     text-align: center;
 }
 
 .droneInfo {
     text-align: center;
-    font-size: 0.95rem;
+    font-size: 1.05rem;
     color: var(--color-gold);
     font-weight: 600;
-    margin-bottom: 15px;
-    padding-bottom: 15px;
+    margin-bottom: 18px;
+    padding-bottom: 18px;
     border-bottom: 1px solid rgba(250, 129, 18, 0.2);
 }
 
 .priceContainer {
     text-align: center;
-    margin-bottom: 25px;
+    margin-bottom: 28px;
 }
 
 .price {
-    font-size: 2.5rem;
+    font-size: 2.8rem;
     color: var(--color-black);
-    font-weight: 800;
+    font-weight: 900;
 }
 
 .actionContainer {
@@ -167,14 +148,15 @@
 
 .chooseBtn {
     width: 100%;
-    padding: 15px;
+    padding: 16px;
     border: none;
-    border-radius: 6px;
+    border-radius: 8px;
     font-weight: 700;
-    font-size: 1rem;
+    font-size: 1.05rem;
     cursor: pointer;
     transition: background 0.3s ease;
     text-transform: uppercase;
+    letter-spacing: 0.5px;
 }
 
 .btnBlack {
@@ -195,9 +177,172 @@
     background-color: var(--color-gold-dark);
 }
 
+/* WEDDING + ADDONS SIDE BY SIDE */
+.bottomRow {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 35px;
+    max-width: 1200px;
+    margin: 60px auto 0;
+    align-items: start;
+}
+
+.weddingCard {
+    background: white;
+    border-radius: 14px;
+    border: 1px solid #eaeaea;
+    padding: 36px 44px;
+    width: 100%;
+}
+
+.weddingHeader {
+    display: inline-block;
+    background-color: var(--color-gold);
+    color: white;
+    font-family: var(--font-heading);
+    font-weight: 800;
+    font-size: 1.2rem;
+    text-transform: uppercase;
+    padding: 14px 32px;
+    border-radius: 8px;
+    margin-bottom: 24px;
+    letter-spacing: 1px;
+}
+
+.weddingDesc {
+    font-size: 1.1rem;
+    color: #444;
+    line-height: 1.7;
+    margin: 0 0 14px 0;
+}
+
+.weddingCta {
+    font-size: 1.05rem;
+    color: #444;
+    margin: 0 0 28px 0;
+    line-height: 1.6;
+}
+
+.weddingContactTitle {
+    font-family: var(--font-heading);
+    font-size: 1.35rem;
+    font-weight: 800;
+    color: #222;
+    margin: 0 0 20px 0;
+    text-align: center;
+}
+
+.weddingContactList {
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+}
+
+.weddingContactRow {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-bottom: 12px;
+    border-bottom: 1px solid #f0f0f0;
+}
+
+.weddingContactRow:last-child {
+    border-bottom: none;
+    padding-bottom: 0;
+}
+
+.weddingContactLabel {
+    font-weight: 700;
+    font-size: 1.05rem;
+    color: #222;
+}
+
+.weddingContactValue {
+    font-size: 1.05rem;
+    color: #555;
+    text-decoration: none;
+    transition: color 0.2s;
+}
+
+.weddingContactValue:hover {
+    color: var(--color-gold);
+}
+
+/* ADD-ONS CARD */
+.addonsCard {
+    background: white;
+    border-radius: 14px;
+    border: 1px solid #eaeaea;
+    padding: 36px 44px;
+    width: 100%;
+}
+
+.addonsHeader {
+    background-color: var(--color-gold);
+    color: white;
+    padding: 14px;
+    text-align: center;
+    font-weight: 800;
+    text-transform: uppercase;
+    font-family: var(--font-heading);
+    letter-spacing: 1px;
+    font-size: 1.2rem;
+    border-radius: 8px;
+    margin-bottom: 24px;
+}
+
+.addonsBody {
+    padding: 0;
+}
+
+.addonsRow {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 18px 0;
+    border-bottom: 1px solid #f0f0f0;
+}
+
+.addonsRow:last-child {
+    border-bottom: none;
+}
+
+.addonsName {
+    font-size: 1.1rem;
+    color: #444;
+    font-weight: 500;
+}
+
+.addonsPrice {
+    font-weight: 800;
+    color: var(--color-black);
+    font-size: 1.2rem;
+}
+
 /* Responsive adjustments */
 @media (max-width: 768px) {
     .title {
-        font-size: 2rem;
+        font-size: 2.2rem;
+    }
+
+    .subtitle {
+        font-size: 1rem;
+    }
+
+    .grid {
+        grid-template-columns: 1fr;
+    }
+
+    .bottomRow {
+        grid-template-columns: 1fr;
+    }
+
+    .weddingCard,
+    .addonsCard {
+        padding: 28px 24px;
+    }
+
+    .price {
+        font-size: 2.2rem;
     }
 }

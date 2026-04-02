@@ -1,29 +1,52 @@
 "use client";
+import { useState } from 'react';
 import styles from './BookingForm.module.css';
 import { useBooking } from '@/context/BookingContext';
 
+const teamMembers = [
+    { name: 'Srihari', role: 'Managing Director', image: '/assets/Sri hari.jpg.jpeg' },
+    { name: 'Shashi', role: 'Creative Director', image: '/assets/Shashi.jpg.jpeg' },
+    { name: 'Chander.k', role: 'Head of Operations', image: '/assets/chandar.jpg.jpeg' },
+    { name: 'Sai Babu', role: 'Lead Photographer', image: '/assets/jumbo.jpg.jpeg' },
+    { name: 'Srinivas Maneti', role: 'Marketing Head', image: '/assets/srinivas.jpg.jpeg' },
+    { name: 'Laxmi Narayana', role: 'Team Member', image: '/assets/Chinna .jpg.jpeg' },
+];
+
 const BookingForm = () => {
     const { openBooking } = useBooking();
+    const [teamIndex, setTeamIndex] = useState(0);
+
+    const handlePrev = () => {
+        setTeamIndex((prev) => (prev - 1 + teamMembers.length) % teamMembers.length);
+    };
+
+    const handleNext = () => {
+        setTeamIndex((prev) => (prev + 1) % teamMembers.length);
+    };
+
+    const current = teamMembers[teamIndex];
 
     return (
         <section className={styles.booking} id="contact">
             <div className="container">
                 <div className={styles.twoCol}>
-                    {/* LEFT SIDE - FOUNDER PHOTO */}
+                    {/* LEFT SIDE - FOUNDER CARD */}
                     <div className={styles.founderSection}>
-                        <div className={styles.founderPhotoContainer}>
-                            {/* eslint-disable-next-line @next/next/no-img-element */}
-                            <img
-                                src="/assets/Camshoot Founder.jpg"
-                                alt="Founder"
-                                className={styles.founderPhoto}
-                            />
-                        </div>
-                        <div className={styles.founderInfo}>
-                            {/* eslint-disable-next-line @next/next/no-img-element */}
-                            <img src="/assets/Camshhot original.jpeg" alt="CamShoot logo" className={styles.founderLogo} />
-                            <p className={styles.founderTitle}>FOUNDER & CEO</p>
-                            <p className={styles.founderValue}>Mahesh</p>
+                        <div className={styles.founderCard}>
+                            <div className={styles.founderPhotoContainer}>
+                                {/* eslint-disable-next-line @next/next/no-img-element */}
+                                <img
+                                    src="/assets/mahi.jpg.jpeg"
+                                    alt="Mahi - Founder & CEO"
+                                    className={styles.founderPhoto}
+                                />
+                            </div>
+                            <div className={styles.founderInfo}>
+                                {/* eslint-disable-next-line @next/next/no-img-element */}
+                                <img src="/assets/Camshhot original.jpeg" alt="CamShoot" className={styles.founderLogo} />
+                                <p className={styles.founderTitle}>FOUNDER & CEO</p>
+                                <p className={styles.founderName}>MAHESH</p>
+                            </div>
                         </div>
                     </div>
 
@@ -107,22 +130,26 @@ const BookingForm = () => {
                             </div>
                         </div>
 
-                        {/* LEADERSHIP TEAM */}
+                        {/* TEAM */}
                         <div className={styles.infoCard}>
-                            <h3 className={styles.cardTitle}>Leadership Team</h3>
-                            <div className={styles.leadershipContainer}>
-                                <div className={styles.leadershipPhotoWrapper}>
-                                    {/* eslint-disable-next-line @next/next/no-img-element */}
-                                    <img
-                                        src="/assets/Camshoot Founder.jpg"
-                                        alt="Leader"
-                                        className={styles.leadershipPhoto}
-                                    />
+                            <h3 className={styles.cardTitle}>Team</h3>
+                            <div className={styles.teamCarousel}>
+                                <button className={styles.carouselBtn} onClick={handlePrev} aria-label="Previous">‹</button>
+                                <div className={styles.leadershipContainer}>
+                                    <div className={styles.leadershipPhotoWrapper}>
+                                        {/* eslint-disable-next-line @next/next/no-img-element */}
+                                        <img
+                                            src={current.image}
+                                            alt={current.name}
+                                            className={styles.leadershipPhoto}
+                                        />
+                                    </div>
+                                    <div className={styles.leadershipInfo}>
+                                        <h4 className={styles.leadershipName}>{current.name}</h4>
+                                        <p className={styles.leadershipRole}>{current.role}</p>
+                                    </div>
                                 </div>
-                                <div className={styles.leadershipInfo}>
-                                    <h4 className={styles.leadershipName}></h4>
-                                    <p className={styles.leadershipTitle}></p>
-                                </div>
+                                <button className={styles.carouselBtn} onClick={handleNext} aria-label="Next">›</button>
                             </div>
                         </div>
 

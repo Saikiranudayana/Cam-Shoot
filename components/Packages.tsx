@@ -44,6 +44,19 @@ const StarIcon = () => (
     </svg>
 );
 
+const ReelIcon = () => (
+    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+        <rect x="2" y="2" width="20" height="20" rx="2.18" ry="2.18" />
+        <line x1="7" y1="2" x2="7" y2="22" />
+        <line x1="17" y1="2" x2="17" y2="22" />
+        <line x1="2" y1="12" x2="22" y2="12" />
+        <line x1="2" y1="7" x2="7" y2="7" />
+        <line x1="2" y1="17" x2="7" y2="17" />
+        <line x1="17" y1="7" x2="22" y2="7" />
+        <line x1="17" y1="17" x2="22" y2="17" />
+    </svg>
+);
+
 
 const PACKAGES = [
     {
@@ -54,6 +67,7 @@ const PACKAGES = [
         isPopular: false,
         buttonColor: 'black',
         features: [
+            { text: '1 Reel - 45s to 1 Min', icon: <ReelIcon /> },
             { text: '4K Quality', icon: <StarIcon /> },
             { text: 'Up to 2 Hr Shoot', icon: <ClockIcon /> },
             { text: 'Edited within 1.5 Hr', icon: <EditIcon /> },
@@ -68,6 +82,7 @@ const PACKAGES = [
         isPopular: true,
         buttonColor: 'orange',
         features: [
+            { text: '2 Reels - 45s to 1 Min', icon: <ReelIcon /> },
             { text: '4K Quality', icon: <StarIcon /> },
             { text: 'Up to 3.5 Hr Shoot', icon: <ClockIcon /> },
             { text: 'Quick Same-Day Delivery', icon: <FlashIcon /> },
@@ -82,6 +97,7 @@ const PACKAGES = [
         isPopular: true,
         buttonColor: 'orange',
         features: [
+            { text: '3 Reels - 45s to 1 Min', icon: <ReelIcon /> },
             { text: '4K Quality', icon: <StarIcon /> },
             { text: 'Up to 5 Hr Shoot', icon: <ClockIcon /> },
             { text: 'Fast Same-Day Delivery', icon: <FlashIcon /> },
@@ -157,6 +173,50 @@ const Packages = () => {
                             </div>
                         </div>
                     ))}
+                </div>
+
+                {/* WEDDING PACKAGES + ADD-ONS SIDE BY SIDE */}
+                <div className={styles.bottomRow}>
+                    {/* WEDDING PACKAGES - LEFT */}
+                    <div className={styles.weddingCard}>
+                        <div className={styles.weddingHeader}>WEDDING PACKAGES</div>
+                        <p className={styles.weddingDesc}>
+                            We capture your entire wedding with our exclusive photo & video packages.
+                        </p>
+                        <p className={styles.weddingCta}>
+                            💌 For package details, get in touch with us today!
+                        </p>
+                        <h4 className={styles.weddingContactTitle}>Contact</h4>
+                        <div className={styles.weddingContactList}>
+                            <div className={styles.weddingContactRow}>
+                                <span className={styles.weddingContactLabel}>Instagram</span>
+                                <a href="https://www.instagram.com/cam__shoot" target="_blank" rel="noopener noreferrer" className={styles.weddingContactValue}>@cam__shoot</a>
+                            </div>
+                            <div className={styles.weddingContactRow}>
+                                <span className={styles.weddingContactLabel}>WhatsApp</span>
+                                <a href="https://wa.me/917207007017" target="_blank" rel="noopener noreferrer" className={styles.weddingContactValue}>+91 72070 07017</a>
+                            </div>
+                            <div className={styles.weddingContactRow}>
+                                <span className={styles.weddingContactLabel}>Mail</span>
+                                <a href="mailto:camshoot3313@gmail.com" className={styles.weddingContactValue}>camshoot3313@gmail.com</a>
+                            </div>
+                        </div>
+                    </div>
+
+                    {/* ADD-ONS - RIGHT */}
+                    <div className={styles.addonsCard}>
+                        <div className={styles.addonsHeader}>ADD ON&apos;S</div>
+                        <div className={styles.addonsBody}>
+                            <div className={styles.addonsRow}>
+                                <span className={styles.addonsName}>Drone Shoot</span>
+                                <span className={styles.addonsPrice}>₹3,499 - ₹3,999/-</span>
+                            </div>
+                            <div className={styles.addonsRow}>
+                                <span className={styles.addonsName}>Extra Video</span>
+                                <span className={styles.addonsPrice}>₹1,499/-</span>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
         </section>

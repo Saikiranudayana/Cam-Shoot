@@ -1,0 +1,271 @@
+.team {
+  padding: 100px 0;
+  background-color: var(--color-white);
+}
+
+.title {
+  font-family: var(--font-heading);
+  font-size: 2.5rem;
+  font-weight: 700;
+  text-align: center;
+  margin-bottom: 4rem;
+  color: var(--color-black);
+}
+
+.teamContent {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 60px;
+  align-items: center;
+}
+
+/* Founder Section */
+.founderSection {
+  display: flex;
+  justify-content: center;
+}
+
+.founderCard {
+  background: linear-gradient(135deg, #1a1a1a 0%, #2a1a1a 100%);
+  border-radius: 20px;
+  overflow: hidden;
+  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.3);
+  max-width: 350px;
+  width: 100%;
+}
+
+.founderImage {
+  position: relative;
+  overflow: hidden;
+  aspect-ratio: 3/4;
+  background: linear-gradient(135deg, #fa8112 0%, #cc660a 100%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.founderImage img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.founderBadge {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  width: 50px;
+  height: 50px;
+  background-color: var(--color-black);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 2rem;
+  color: var(--color-gold);
+  font-weight: bold;
+}
+
+.founderInfo {
+  padding: 30px;
+  text-align: center;
+  background-color: var(--color-white);
+}
+
+.companyName {
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: var(--color-black);
+  margin-bottom: 5px;
+  letter-spacing: 2px;
+}
+
+.founderRole {
+  font-size: 0.9rem;
+  color: #6b7280;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  margin-bottom: 8px;
+}
+
+.founderName {
+  font-size: 1.1rem;
+  font-weight: 600;
+  color: var(--color-black);
+}
+
+/* Leadership Section */
+.leadershipSection {
+  display: flex;
+  flex-direction: column;
+  gap: 30px;
+}
+
+.leadershipTitle {
+  font-size: 1.8rem;
+  font-weight: 700;
+  text-align: center;
+  color: var(--color-black);
+  margin-bottom: 20px;
+}
+
+.leadershipCarousel {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 40px;
+}
+
+.carouselButton {
+  background-color: var(--color-gold);
+  color: var(--color-white);
+  border: none;
+  width: 45px;
+  height: 45px;
+  border-radius: 50%;
+  font-size: 1.5rem;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.3s ease;
+  flex-shrink: 0;
+}
+
+.carouselButton:hover {
+  background-color: var(--color-gold-dark);
+  transform: scale(1.1);
+}
+
+.memberCard {
+  background: linear-gradient(135deg, #1a1a1a 0%, #2a1a1a 100%);
+  border-radius: 20px;
+  overflow: hidden;
+  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.3);
+  max-width: 300px;
+  width: 100%;
+}
+
+.memberImage {
+  position: relative;
+  overflow: hidden;
+  aspect-ratio: 3/4;
+  background: linear-gradient(135deg, #fa8112 0%, #cc660a 100%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.memberImage img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.memberBadge {
+  position: absolute;
+  top: 15px;
+  right: 15px;
+  width: 45px;
+  height: 45px;
+  background-color: var(--color-black);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.5rem;
+  color: var(--color-gold);
+  font-weight: bold;
+}
+
+.memberInfo {
+  padding: 20px;
+  text-align: center;
+  background-color: var(--color-white);
+}
+
+.memberName {
+  font-size: 1.1rem;
+  font-weight: 700;
+  color: var(--color-black);
+  margin-bottom: 5px;
+}
+
+.memberRole {
+  font-size: 0.85rem;
+  color: #6b7280;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+/* Dots Indicator */
+.dotsContainer {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+  margin-top: 20px;
+}
+
+.dot {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  border: none;
+  background-color: #e5e7eb;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.dot:hover {
+  background-color: var(--color-gold-light);
+}
+
+.dotActive {
+  background-color: var(--color-gold);
+  transform: scale(1.3);
+}
+
+/* Responsive */
+@media (max-width: 1024px) {
+  .teamContent {
+    grid-template-columns: 1fr;
+    gap: 40px;
+  }
+
+  .founderCard {
+    max-width: 300px;
+  }
+
+  .memberCard {
+    max-width: 250px;
+  }
+}
+
+@media (max-width: 768px) {
+  .title {
+    font-size: 2rem;
+  }
+
+  .leadershipCarousel {
+    gap: 20px;
+  }
+
+  .carouselButton {
+    width: 40px;
+    height: 40px;
+    font-size: 1.2rem;
+  }
+
+  .founderInfo,
+  .memberInfo {
+    padding: 20px;
+  }
+
+  .companyName {
+    font-size: 1.2rem;
+  }
+
+  .memberName {
+    font-size: 1rem;
+  }
+}

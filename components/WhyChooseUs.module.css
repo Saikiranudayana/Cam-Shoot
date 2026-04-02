@@ -1,6 +1,6 @@
 .section {
-    padding: 80px 20px;
-    background-color: #fff;
+    padding: 100px 20px;
+    background-color: #f5f5f5;
     overflow: hidden;
 }
 
@@ -9,7 +9,7 @@
     margin: 0 auto;
     display: flex;
     align-items: center;
-    gap: 60px;
+    gap: 70px;
 }
 
 .content {
@@ -19,7 +19,6 @@
 .imageContainer {
     flex: 1;
     position: relative;
-    /* Creating a frame effect */
 }
 
 .imageFrame {
@@ -27,67 +26,74 @@
     width: 100%;
     border-radius: 20px;
     overflow: hidden;
-    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
-    background-color: #fafafa;
-    min-height: 400px;
+    box-shadow: 0 20px 50px rgba(0, 0, 0, 0.3);
+    background-color: #eee;
+    min-height: 450px;
     display: flex;
     align-items: center;
     justify-content: center;
 }
 
 .title {
-    font-size: 2.5rem;
-    font-weight: 800;
+    font-family: var(--font-heading);
+    font-size: 3rem;
+    font-weight: 900;
     line-height: 1.2;
     margin-bottom: 20px;
     color: var(--color-black);
     text-transform: uppercase;
 }
 
-.text {
-    font-size: 1rem;
-    line-height: 1.6;
+.highlight {
+    color: var(--color-gold);
+}
+
+.subtitle {
+    font-size: 1.15rem;
+    line-height: 1.7;
     color: #666;
-    margin-bottom: 40px;
+    margin-bottom: 50px;
 }
 
 .features {
     display: flex;
     flex-direction: column;
-    gap: 30px;
+    gap: 36px;
 }
 
 .featureItem {
     display: flex;
-    gap: 20px;
+    gap: 22px;
     align-items: flex-start;
 }
 
 .iconWrapper {
     color: var(--color-gold);
-    min-width: 60px;
+    min-width: 64px;
     display: flex;
     align-items: flex-start;
     padding-top: 0;
 }
 
 .iconWrapper svg {
-    width: 48px;
-    height: 48px;
+    width: 52px;
+    height: 52px;
 }
 
 .featureContent h3 {
-    font-size: 1.2rem;
-    font-weight: 700;
-    margin-bottom: 5px;
+    font-family: var(--font-heading);
+    font-size: 1.3rem;
+    font-weight: 800;
+    margin-bottom: 6px;
     color: var(--color-black);
     text-transform: uppercase;
+    letter-spacing: 0.5px;
 }
 
 .featureContent p {
-    font-size: 0.95rem;
+    font-size: 1.05rem;
     color: #666;
-    line-height: 1.5;
+    line-height: 1.6;
 }
 
 @media (max-width: 900px) {
@@ -96,6 +102,10 @@
     }
 
     .title {
-        font-size: 2rem;
+        font-size: 2.2rem;
+    }
+
+    .imageFrame {
+        min-height: 300px;
     }
 }
